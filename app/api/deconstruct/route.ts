@@ -4,8 +4,8 @@ import { sanitizeInput, checkRateLimit } from '@/lib/security';
 import { deconstructNote } from '@/lib/gemini';
 
 const Schema = z.object({
-  content: z.string().min(10, 'Catatan minimal 10 karakter').max(10000, 'Catatan maksimal 10.000 karakter'),
-  subject: z.string().min(2, 'Nama subjek minimal 2 karakter').max(100)
+  content: z.string().min(10, 'Catatan minimal 10 karakter').max(5000, 'Catatan maksimal 5.000 karakter (hemat kuota)'),
+  subject: z.string().min(2, 'Nama subjek minimal 2 karakter').max(80)
 });
 
 export async function POST(req: NextRequest) {

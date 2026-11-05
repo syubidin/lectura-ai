@@ -119,7 +119,8 @@ async function callGeminiApi<T>(
           body: JSON.stringify({
             contents: [{ parts: [{ text: prompt }] }],
             generationConfig: {
-              temperature: 0.25,
+              temperature: 0.2,
+              maxOutputTokens: 1500,
               responseMimeType: 'application/json'
             }
           }),
@@ -193,23 +194,25 @@ async function callGeminiApi<T>(
 
 // 1. Modul Dekonstruksi Catatan
 export async function deconstructNote(content: string, subject: string) {
+  // Truncate to maximum ~4500 chars to prevent massive prompt token waste
+  const trimmedContent = content.length > 4500 ? `${content.substring(0, 4500)}\n[Catatan dipadatkan...]` : content;
+
   const prompt = buildSecureSystemPrompt(`
-Analisislah materi kuliah / catatan berikut untuk subjek "${subject}".
-Kembalikan JSON persis sesuai skema berikut tanpa teks tambahan:
+Subjek: "${subject}".
+Tugas: Ekstrak catatan menjadi konsep berbobot & rencana aksi. Output persis JSON skema ini:
 {
-  "title": "Judul Rangkuman Materi",
+  "title": "Judul Rangkuman Padat",
   "coreConcepts": [
-    { "term": "Nama Konsep", "definition": "Penjelasan singkat, padat, dan jelas", "importance": "high" }
+    { "term": "Nama Konsep", "definition": "Definisi padat & esensial (1-2 kalimat)", "importance": "high" }
   ],
   "biteSizedModules": [
-    { "timeMinutes": 15, "title": "Topik 15 Menit Pertama", "action": "Langkah konkret yang harus dipelajari/dikerjakan" }
+    { "timeMinutes": 15, "title": "Topik 15-Menit", "action": "Aksi belajar spesifik" }
   ],
-  "keyFormulaOrRules": [ "Rumus / Kaidah Utama 1", "Kaidah Penting 2" ]
+  "keyFormulaOrRules": [ "Kaidah / Rumus 1", "Kaidah 2" ]
 }
-
-Materi Kuliah:
+Materi:
 """
-${content}
+${trimmedContent}
 """
 `);
 
