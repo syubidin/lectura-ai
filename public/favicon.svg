@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none">
+  <!-- Background rounded square -->
+  <rect width="32" height="32" rx="8" fill="#4F46E5"/>
+  
+  <!-- Open book left page -->
+  <path d="M6 9C6 8.44772 6.44772 8 7 8H15V24H7C6.44772 24 6 23.5523 6 23V9Z" fill="white" opacity="0.9"/>
+  
+  <!-- Open book right page -->
+  <path d="M17 8H25C25.5523 8 26 8.44772 26 9V23C26 23.5523 25.5523 24 25 24H17V8Z" fill="white" opacity="0.7"/>
+  
+  <!-- Book spine / center divider -->
+  <rect x="15" y="8" width="2" height="16" fill="#4F46E5" opacity="0.5"/>
+  
+  <!-- Lines on left page -->
+  <rect x="8" y="12" width="5" height="1.5" rx="0.75" fill="#4F46E5" opacity="0.5"/>
+  <rect x="8" y="15" width="5" height="1.5" rx="0.75" fill="#4F46E5" opacity="0.5"/>
+  <rect x="8" y="18" width="3.5" height="1.5" rx="0.75" fill="#4F46E5" opacity="0.5"/>
+  
+  <!-- Lines on right page -->
+  <rect x="19" y="12" width="5" height="1.5" rx="0.75" fill="#312E81" opacity="0.4"/>
+  <rect x="19" y="15" width="5" height="1.5" rx="0.75" fill="#312E81" opacity="0.4"/>
+  <rect x="19" y="18" width="3.5" height="1.5" rx="0.75" fill="#312E81" opacity="0.4"/>
+  
+  <!-- AI spark dot (top right corner accent) -->
+  <circle cx="26" cy="6" r="3.5" fill="#A5B4FC"/>
+  <path d="M26 4L26.5 5.5L28 6L26.5 6.5L26 8L25.5 6.5L24 6L25.5 5.5L26 4Z" fill="#4F46E5"/>
+</svg>

@@ -20,6 +20,7 @@ export default function CramPlan() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [result, setResult] = useState<CramPlanResult | null>(null);
+  const [mode, setMode] = useState<string>('');
   const [checkedBlocks, setCheckedBlocks] = useState<Record<number, boolean>>({});
 
   const handlePresetHours = (h: number, defaultSubject = 'Kalkulus II & Persamaan Diferensial') => {
@@ -49,6 +50,7 @@ export default function CramPlan() {
       if (!json.success) throw new Error(json.error || 'Gagal menyusun rencana belajar darurat');
 
       setResult(json.data);
+      setMode(json.mode || '');
       setCheckedBlocks({});
     } catch (err: any) {
       setError(err.message || 'Terjadi kesalahan sistem.');
@@ -236,6 +238,13 @@ export default function CramPlan() {
           </div>
         ) : result ? (
           <div className="space-y-5">
+            {/* Demo Mode Banner */}
+            {mode === 'fallback_demo' && (
+              <div className="p-3 bg-amber-50 border border-amber-200 rounded-xl flex items-center gap-2 text-xs text-amber-800">
+                <span className="text-amber-500">⚡</span>
+                <span><strong>Mode Demo Cerdas</strong> — Ini adalah contoh rencana belajar. Hubungkan API Key untuk jadwal yang dipersonalisasi AI.</span>
+              </div>
+            )}
             {/* Survival Strategy Banner */}
             <div className="p-4 rounded-xl bg-amber-50/70 border border-amber-200/80">
               <div className="flex items-center gap-2 mb-1.5">

@@ -27,6 +27,7 @@ export default function FeynmanExplainer() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [result, setResult] = useState<FeynmanResult | null>(null);
+  const [mode, setMode] = useState<string>('');
   const [showQuizHint, setShowQuizHint] = useState(false);
 
   const applyPreset = (preset: typeof PRESET_TOPICS[0]) => {
@@ -57,6 +58,7 @@ export default function FeynmanExplainer() {
       if (!json.success) throw new Error(json.error || 'Gagal menghasilkan penjelasan Feynman');
 
       setResult(json.data);
+      setMode(json.mode || '');
     } catch (err: any) {
       setError(err.message || 'Terjadi kesalahan sistem.');
     } finally {
@@ -198,6 +200,13 @@ export default function FeynmanExplainer() {
           </div>
         ) : result ? (
           <div className="space-y-5">
+            {/* Demo Mode Banner */}
+            {mode === 'fallback_demo' && (
+              <div className="p-3 bg-amber-50 border border-amber-200 rounded-xl flex items-center gap-2 text-xs text-amber-800">
+                <span className="text-amber-500">⚡</span>
+                <span><strong>Mode Demo Cerdas</strong> — Ini adalah contoh penjelasan Feynman. Hubungkan API Key untuk penjelasan yang disesuaikan AI.</span>
+              </div>
+            )}
             {/* Featured Analogy Card */}
             <div className="p-5 rounded-2xl bg-gradient-to-br from-violet-50/90 via-purple-50/50 to-indigo-50/80 border border-violet-200/80 relative overflow-hidden">
               <Quote className="absolute -top-2 -right-2 w-16 h-16 text-violet-200/50 -rotate-12 pointer-events-none" />

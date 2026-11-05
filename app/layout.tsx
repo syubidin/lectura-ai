@@ -4,6 +4,15 @@ import type { Metadata } from 'next';
 export const metadata: Metadata = {
   title: 'Lectura AI — Asisten Akademik & Copilot Belajar Mahasiswa',
   description: 'Aplikasi AI copilot akademik modern: dekonstruksi catatan kuliah jadi modul 15-menit, prediksi soal jebakan dosen, dan rencana belajar kilat bertenaga Google Gemini AI.',
+  icons: {
+    icon: [
+      { url: '/favicon.svg', type: 'image/svg+xml' },
+    ],
+    apple: '/favicon.svg',
+  },
+  keywords: ['AI akademik', 'belajar mahasiswa', 'Gemini AI', 'catatan kuliah', 'prediksi soal ujian', 'feynman', 'cram plan'],
+  authors: [{ name: 'syubidin', url: 'https://github.com/syubidin' }],
+  creator: 'syubidin',
 };
 
 export default function RootLayout({

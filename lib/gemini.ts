@@ -95,7 +95,7 @@ async function callGeminiApi<T>(
 ): Promise<{ data: T; mode: 'live_ai' | 'fallback_demo'; modelUsed?: string; error?: string }> {
   const apiKey = process.env.GEMINI_API_KEY?.trim();
 
-  if (!apiKey || apiKey === 'your_gemini_api_key_here') {
+  if (!apiKey || apiKey === 'your_gemini_api_key_here' || apiKey === 'masukkan_api_key_anda_disini') {
     console.warn('[Lectura AI] GEMINI_API_KEY belum terpasang di .env.local. Berjalan dalam Mode Demo.');
     return { data: fallbackData, mode: 'fallback_demo', error: 'API key belum terpasang' };
   }
@@ -106,24 +106,28 @@ async function callGeminiApi<T>(
     const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`;
 
     try {
-      const response = await fetch(apiUrl, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          contents: [
-            {
-              parts: [{ text: prompt }]
+      // AbortSignal.timeout() may not exist in older Node versions — use a manual timeout
+      let timeoutId: ReturnType<typeof setTimeout> | null = null;
+      const controller = new AbortController();
+      timeoutId = setTimeout(() => controller.abort(), 25000);
+
+      let response: Response;
+      try {
+        response = await fetch(apiUrl, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            contents: [{ parts: [{ text: prompt }] }],
+            generationConfig: {
+              temperature: 0.25,
+              responseMimeType: 'application/json'
             }
-          ],
-          generationConfig: {
-            temperature: 0.25,
-            responseMimeType: 'application/json'
-          }
-        }),
-        signal: AbortSignal.timeout(25000)
-      });
+          }),
+          signal: controller.signal
+        });
+      } finally {
+        if (timeoutId) clearTimeout(timeoutId);
+      }
 
       if (!response.ok) {
         const errText = await response.text();
@@ -135,7 +139,7 @@ async function callGeminiApi<T>(
       const jsonRes = await response.json();
       const parts = jsonRes?.candidates?.[0]?.content?.parts || [];
       
-      // Filter out thinking parts if Gemini 3 thought is enabled
+      // Filter out thinking parts if Gemini thought mode is enabled
       const textPart = parts.find((p: any) => !p.thought) || parts[parts.length - 1];
       const candidateText = textPart?.text;
 
@@ -158,11 +162,28 @@ async function callGeminiApi<T>(
       };
     } catch (err: any) {
       lastError = err?.message || String(err);
-      console.warn(`[Lectura AI Exception on ${model}]:`, lastError);
+      // Network errors (no internet, ECONNREFUSED, DNS fail, AbortError) → try next model
+      const isNetworkError = (
+        lastError.includes('fetch failed') ||
+        lastError.includes('ECONNREFUSED') ||
+        lastError.includes('ENOTFOUND') ||
+        lastError.includes('network') ||
+        lastError.includes('abort') ||
+        lastError.includes('timeout') ||
+        lastError.includes('UND_ERR') ||
+        lastError.includes('certificate') ||
+        lastError.includes('connect')
+      );
+      if (isNetworkError) {
+        console.warn(`[Lectura AI] Koneksi gagal ke ${model} (${lastError.split('\n')[0]}). Mencoba model berikutnya atau mode demo...`);
+      } else {
+        console.warn(`[Lectura AI Exception on ${model}]:`, lastError);
+      }
     }
   }
 
-  console.error('[Lectura AI]: Semua model gagal dipanggil. Menggunakan fallback demo.', lastError);
+  // All models failed → gracefully serve demo data
+  console.warn('[Lectura AI]: Tidak dapat terhubung ke AI. Melanjutkan dengan Mode Demo Cerdas.');
   return { 
     data: fallbackData, 
     mode: 'fallback_demo',
