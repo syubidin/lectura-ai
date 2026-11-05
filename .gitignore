@@ -36,3 +36,4 @@ tmp/
 # .bats file
 *.bat
 *.ps1
+PANDUAN_KLIEN.md
