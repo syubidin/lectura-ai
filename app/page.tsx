@@ -32,6 +32,10 @@ export default function Home() {
       sessionStorage.setItem('lectura_entered_app', 'true');
     } catch {}
     window.scrollTo({ top: 0, behavior: 'smooth' });
+    // Pastikan onboarding terbuka ketika pengguna masuk ke dalam aplikasi
+    setTimeout(() => {
+      setShowOnboarding(true);
+    }, 250);
   };
 
   const handleBackToLanding = () => {

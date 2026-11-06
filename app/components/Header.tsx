@@ -90,10 +90,10 @@ export default function Header({ activeTab, setActiveTab, onOpenOnboarding, onBa
   }, []);
 
   const navItems = [
-    { id: 'deconstruct', label: 'Ringkas Catatan', icon: BookOpen },
+    { id: 'deconstruct', label: 'Dekonstruksi Catatan', icon: BookOpen },
     { id: 'trap', label: 'Prediksi Soal Jebakan', icon: Target },
-    { id: 'cram', label: 'Jadwal 24-Jam', icon: Clock },
-    { id: 'feynman', label: 'Tutor Feynman', icon: Lightbulb },
+    { id: 'cram', label: 'Rencana Belajar Darurat', icon: Clock },
+    { id: 'feynman', label: 'Metode Feynman', icon: Lightbulb },
   ];
 
   return (
@@ -149,22 +149,22 @@ export default function Header({ activeTab, setActiveTab, onOpenOnboarding, onBa
             </nav>
 
             {/* Header Right Actions */}
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
               {onBackToLanding && (
                 <button
                   onClick={onBackToLanding}
-                  className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 transition"
+                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-medium border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 transition shadow-xs"
                   title="Kembali ke halaman profil tim dan proyek"
                 >
-                  <span>Beranda Proyek</span>
+                  <span>Beranda</span>
                 </button>
               )}
 
               {onOpenOnboarding && (
                 <button
                   onClick={onOpenOnboarding}
-                  className="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 transition"
-                  title="Buka panduan onboarding aplikasi"
+                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-medium border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 transition shadow-xs"
+                  title="Buka panduan penggunaan aplikasi"
                 >
                   <HelpCircle className="w-3.5 h-3.5 text-indigo-600" />
                   <span className="hidden sm:inline">Panduan</span>
@@ -173,14 +173,14 @@ export default function Header({ activeTab, setActiveTab, onOpenOnboarding, onBa
 
               <button
                 onClick={() => setShowStatusModal(true)}
-                className={`flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-medium border transition-all ${
+                className={`flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl text-xs font-medium border transition-all shadow-xs ${
                   status.loading
                     ? 'bg-slate-50 border-slate-200 text-slate-500'
                     : status.connected
-                    ? 'bg-emerald-50/80 border-emerald-200 text-emerald-800 hover:bg-emerald-100/70'
-                    : 'bg-amber-50/80 border-amber-200 text-amber-800 hover:bg-amber-100/70'
+                    ? 'bg-emerald-50 border-emerald-200 text-emerald-800 hover:bg-emerald-100/70'
+                    : 'bg-amber-50 border-amber-200 text-amber-800 hover:bg-amber-100/70'
                 }`}
-                title="Klik untuk melihat status koneksi Google Gemini API"
+                title="Status koneksi AI"
               >
                 <span className="relative flex h-2 w-2">
                   {status.connected && (
@@ -196,18 +196,13 @@ export default function Header({ activeTab, setActiveTab, onOpenOnboarding, onBa
                     }`}
                   ></span>
                 </span>
-                <span className="font-medium text-[11px] sm:text-xs">
+                <span className="font-semibold text-[11px]">
                   {status.loading
                     ? 'Cek AI...'
                     : status.connected
-                    ? 'Gemini 3 Flash Aktif'
-                    : 'Mode Demo (Offline)'}
+                    ? 'Gemini Aktif'
+                    : 'Mode Demo'}
                 </span>
-                {status.connected && status.latencyMs > 0 && (
-                  <span className="hidden lg:inline text-[10px] text-emerald-600 bg-emerald-100/80 px-1.5 py-0.2 rounded font-mono">
-                    {status.latencyMs}ms
-                  </span>
-                )}
               </button>
             </div>
 

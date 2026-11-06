@@ -1,17 +1,17 @@
 'use client';
 import React from 'react';
 import Image from 'next/image';
-import { 
-  Sparkles, 
-  ArrowRight, 
-  BookOpen, 
-  Target, 
-  Clock, 
-  Lightbulb, 
-  GraduationCap, 
-  Users, 
-  ShieldCheck, 
-  Cpu, 
+import {
+  Sparkles,
+  ArrowRight,
+  BookOpen,
+  Target,
+  Clock,
+  Lightbulb,
+  GraduationCap,
+  Users,
+  ShieldCheck,
+  Cpu,
   ChevronRight,
   Award
 } from 'lucide-react';
@@ -26,19 +26,16 @@ export default function LandingPage({ onEnterApp, onOpenFeature }: LandingPagePr
     {
       nim: '17240703',
       name: 'PERIANDO PASARIBU',
-      role: 'Research & System Logic',
       avatarColor: 'bg-indigo-600 text-white'
     },
     {
       nim: '17240710',
       name: 'MAICKEL RESTU ALAKSYAH',
-      role: 'Project Lead & AI Prompt Engineering',
       avatarColor: 'bg-blue-600 text-white'
     },
     {
       nim: '17240647',
       name: 'FADIL NUR RAMADHAN',
-      role: 'Frontend UI/UX & Quality Assurance',
       avatarColor: 'bg-emerald-600 text-white'
     }
   ];
@@ -76,22 +73,26 @@ export default function LandingPage({ onEnterApp, onOpenFeature }: LandingPagePr
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-slate-50 via-white to-slate-50 text-slate-900 flex flex-col font-sans selection:bg-indigo-600 selection:text-white">
-      
+
       {/* Top Navigation Bar */}
       <header className="sticky top-0 z-30 bg-white/80 backdrop-blur-md border-b border-slate-200/80">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="w-9 h-9 rounded-xl bg-indigo-600 text-white flex items-center justify-center font-bold shadow-sm shadow-indigo-200">
-              <Sparkles className="w-5 h-5" />
+            <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-indigo-600 via-indigo-500 to-violet-500 flex items-center justify-center text-white shadow-sm shadow-indigo-200">
+              <BookOpen className="w-5 h-5" />
             </div>
-            <div>
-              <span className="font-extrabold text-base tracking-tight text-slate-900 flex items-center gap-1.5">
-                Lectura AI
-                <span className="text-[10px] uppercase font-bold tracking-wider px-1.5 py-0.5 rounded-full bg-indigo-50 text-indigo-700 border border-indigo-200/60">
-                  v1.0
+            <div className="flex flex-col">
+              <div className="flex items-center gap-2">
+                <span className="font-bold text-base sm:text-lg tracking-tight text-slate-900">
+                  Lectura<span className="text-indigo-600 font-extrabold">AI</span>
                 </span>
+                <span className="text-[10px] font-semibold px-1.5 py-0.5 rounded-full bg-slate-100 text-slate-600 border border-slate-200/60">
+                  Academic
+                </span>
+              </div>
+              <span className="hidden sm:inline text-[11px] text-slate-500 font-medium">
+                Copilot Belajar & Persiapan Ujian
               </span>
-              <p className="text-[11px] text-slate-500 hidden sm:block">Academic AI Copilot & Cognitive Learning</p>
             </div>
           </div>
 
@@ -114,13 +115,13 @@ export default function LandingPage({ onEnterApp, onOpenFeature }: LandingPagePr
       {/* Hero Section */}
       <section className="relative overflow-hidden pt-10 pb-16 sm:pt-16 sm:pb-20 border-b border-slate-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          
+
           {/* Institutional Badge */}
           <div className="flex flex-col sm:flex-row items-center justify-center gap-3 mb-8 text-center">
             <div className="inline-flex items-center gap-2.5 px-4 py-2 rounded-2xl bg-white border border-slate-200/90 shadow-sm hover:border-indigo-300 transition">
               <div className="relative w-8 h-8 rounded-lg overflow-hidden shrink-0 border border-slate-100">
-                <Image 
-                  src="/logo-ubsi.jpg" 
+                <Image
+                  src="/logo-ubsi.jpg"
                   alt="Logo Universitas Bina Sarana Informatika"
                   fill
                   sizes="32px"
@@ -148,7 +149,7 @@ export default function LandingPage({ onEnterApp, onOpenFeature }: LandingPagePr
                 Copilot Akademik Mahasiswa
               </span>
             </h1>
-            
+
             <p className="text-sm sm:text-base text-slate-600 max-w-2xl mx-auto leading-relaxed">
               Platform kecerdasan buatan terapan untuk mereduksi beban kognitif mahasiswa. Mentransformasi catatan rumit menjadi modul 15-menit, memprediksi jebakan soal dosen, dan mengatur strategi belajar SKS berbasis sains kognitif.
             </p>
@@ -193,7 +194,7 @@ export default function LandingPage({ onEnterApp, onOpenFeature }: LandingPagePr
       {/* Feature Highlights Grid */}
       <section className="py-14 sm:py-18 bg-white border-b border-slate-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          
+
           <div className="text-center max-w-2xl mx-auto mb-10 sm:mb-14">
             <span className="text-xs font-bold uppercase tracking-wider text-indigo-600 bg-indigo-50 px-3 py-1 rounded-full border border-indigo-100">
               Instrumen Pembelajaran
@@ -210,7 +211,7 @@ export default function LandingPage({ onEnterApp, onOpenFeature }: LandingPagePr
             {features.map((feat) => {
               const Icon = feat.icon;
               return (
-                <div 
+                <div
                   key={feat.id}
                   onClick={() => {
                     if (onOpenFeature) {
@@ -255,7 +256,7 @@ export default function LandingPage({ onEnterApp, onOpenFeature }: LandingPagePr
       {/* Academic Project & Team Credits Section */}
       <section id="tim-penyusun" className="py-14 sm:py-20 bg-slate-50 border-b border-slate-200/70">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          
+
           <div className="max-w-3xl mx-auto text-center mb-10 sm:mb-12">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-200 text-slate-700 text-xs font-semibold mb-3">
               <Award className="w-3.5 h-3.5 text-indigo-600" />
@@ -273,25 +274,21 @@ export default function LandingPage({ onEnterApp, onOpenFeature }: LandingPagePr
           {/* Team Cards */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-5 max-w-4xl mx-auto">
             {teamMembers.map((member, i) => (
-              <div 
+              <div
                 key={i}
                 className="bg-white rounded-2xl p-6 border border-slate-200/80 shadow-subtle hover:border-slate-300 transition flex flex-col items-center text-center"
               >
                 <div className={`w-14 h-14 rounded-2xl ${member.avatarColor} flex items-center justify-center font-extrabold text-base mb-4 shadow-sm`}>
                   {member.name.split(' ').map(n => n[0]).slice(0, 2).join('')}
                 </div>
-                
-                <span className="text-[11px] font-mono font-bold px-2.5 py-0.5 rounded-full bg-slate-100 text-slate-700 mb-1.5 border border-slate-200/60">
+
+                <span className="text-[11px] font-mono font-bold px-2.5 py-0.5 rounded-full bg-slate-100 text-slate-700 mb-2 border border-slate-200/60">
                   NIM: {member.nim}
                 </span>
 
                 <h3 className="text-sm font-bold text-slate-900 tracking-tight leading-snug">
                   {member.name}
                 </h3>
-
-                <p className="text-xs text-indigo-600 font-medium mt-1">
-                  {member.role}
-                </p>
 
                 <div className="mt-4 pt-3 border-t border-slate-100 w-full text-[11px] text-slate-400">
                   Teknik Informatika UBSI
@@ -336,14 +333,50 @@ export default function LandingPage({ onEnterApp, onOpenFeature }: LandingPagePr
         </div>
       </section>
 
-      {/* Minimal Footer */}
-      <footer className="mt-auto py-6 border-t border-slate-200 bg-slate-50 text-center text-xs text-slate-500">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-2">
-          <p>© 2026 Lectura AI — Proyek Tugas Kuliah Kecerdasan Buatan</p>
-          <p className="text-[11px] text-slate-400">Universitas Bina Sarana Informatika (UBSI)</p>
+      {/* Synchronized Footer */}
+      <footer className="mt-auto border-t border-slate-200/80 bg-white/60 backdrop-blur-sm py-8 text-xs text-slate-500">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-4">
+            
+            <div className="flex items-center gap-3">
+              <div className="w-8 h-8 rounded-xl bg-gradient-to-tr from-indigo-600 via-indigo-500 to-violet-500 flex items-center justify-center text-white shadow-sm shadow-indigo-200">
+                <BookOpen className="w-4 h-4" />
+              </div>
+              <div>
+                <span className="font-bold text-slate-900 text-sm">
+                  Lectura<span className="text-indigo-600 font-extrabold">AI</span>
+                </span>
+                <p className="text-[11px] text-slate-500">
+                  Asisten Akademik & Akselerator Pemahaman Mahasiswa
+                </p>
+              </div>
+            </div>
+
+            <div className="flex flex-wrap items-center justify-center gap-4 text-[11px]">
+              <span className="flex items-center gap-1.5 text-slate-600">
+                <ShieldCheck className="w-3.5 h-3.5 text-emerald-600" />
+                Validasi Aman Zod & Sanitasi Input
+              </span>
+              <span className="text-slate-300">•</span>
+              <span className="flex items-center gap-1.5 text-slate-600">
+                <Sparkles className="w-3.5 h-3.5 text-indigo-600" />
+                Google Gemini 3 Flash REST Engine
+              </span>
+              <span className="text-slate-300">•</span>
+              <span className="text-slate-600">
+                Universitas BSI (2026)
+              </span>
+            </div>
+
+            <div className="text-[11px] text-slate-400">
+              © {new Date().getFullYear()} Lectura AI. Didesain untuk kesuksesan akademik.
+            </div>
+
+          </div>
         </div>
       </footer>
 
     </div>
   );
 }
+

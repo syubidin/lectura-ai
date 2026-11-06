@@ -10,12 +10,12 @@ export default function Footer() {
           
           {/* Brand Info */}
           <div className="flex items-center gap-3">
-            <div className="w-7 h-7 rounded-lg bg-indigo-600 text-white flex items-center justify-center font-bold">
+            <div className="w-8 h-8 rounded-xl bg-gradient-to-tr from-indigo-600 via-indigo-500 to-violet-500 flex items-center justify-center text-white shadow-sm shadow-indigo-200">
               <BookOpen className="w-4 h-4" />
             </div>
             <div>
               <span className="font-bold text-slate-900 text-sm">
-                Lectura<span className="text-indigo-600">AI</span>
+                Lectura<span className="text-indigo-600 font-extrabold">AI</span>
               </span>
               <p className="text-[11px] text-slate-500">
                 Asisten Akademik & Akselerator Pemahaman Mahasiswa
