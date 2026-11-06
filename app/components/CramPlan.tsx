@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 import React, { useState } from 'react';
 import { 
   Clock, 
@@ -78,7 +78,7 @@ export default function CramPlan() {
     }
     return {
       label: 'Mode Terstruktur Optimal',
-      color: 'bg-indigo-50 text-indigo-700 border-indigo-200'
+      color: 'bg-brand-50 text-brand-700 border-brand-200'
     };
   };
 
@@ -241,8 +241,8 @@ export default function CramPlan() {
             {/* Demo Mode Banner */}
             {mode === 'fallback_demo' && (
               <div className="p-3 bg-amber-50 border border-amber-200 rounded-xl flex items-center gap-2 text-xs text-amber-800">
-                <span className="text-amber-500">⚡</span>
-                <span><strong>Mode Demo Cerdas</strong> — Ini adalah contoh rencana belajar. Hubungkan API Key untuk jadwal yang dipersonalisasi AI.</span>
+                <span className="text-amber-500">âš¡</span>
+                <span><strong>Mode Demo Cerdas</strong> â€” Ini adalah contoh rencana belajar. Hubungkan API Key untuk jadwal yang dipersonalisasi AI.</span>
               </div>
             )}
             {/* Survival Strategy Banner */}
@@ -329,9 +329,9 @@ export default function CramPlan() {
 
             {/* Recommended Recovery note */}
             <div className="p-3.5 rounded-xl bg-slate-900 text-slate-100 flex items-start gap-3 text-xs shadow-sm">
-              <Moon className="w-4 h-4 text-indigo-400 shrink-0 mt-0.5" />
+              <Moon className="w-4 h-4 text-brand-400 shrink-0 mt-0.5" />
               <div>
-                <span className="font-bold text-indigo-300 uppercase text-[10px] tracking-wide block mb-0.5">
+                <span className="font-bold text-brand-300 uppercase text-[10px] tracking-wide block mb-0.5">
                   Catatan Konsolidasi Memori (Wajib Tidur):
                 </span>
                 <p className="text-slate-300 leading-relaxed text-[11px] sm:text-xs">

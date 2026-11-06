@@ -1,27 +1,36 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none">
-  <!-- Background rounded square -->
-  <rect width="32" height="32" rx="8" fill="#4F46E5"/>
-  
+  <!-- Background rounded square: violet-700 -->
+  <rect width="32" height="32" rx="8" fill="#6D28D9"/>
+
+  <!-- Gradient overlay for depth -->
+  <rect width="32" height="32" rx="8" fill="url(#grad)"/>
+  <defs>
+    <linearGradient id="grad" x1="0" y1="0" x2="32" y2="32" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#7C3AED" stop-opacity="0.6"/>
+      <stop offset="100%" stop-color="#4C1D95" stop-opacity="0.6"/>
+    </linearGradient>
+  </defs>
+
   <!-- Open book left page -->
-  <path d="M6 9C6 8.44772 6.44772 8 7 8H15V24H7C6.44772 24 6 23.5523 6 23V9Z" fill="white" opacity="0.9"/>
-  
+  <path d="M6 10C6 9.44772 6.44772 9 7 9H15V23H7C6.44772 23 6 22.5523 6 22V10Z" fill="white" opacity="0.92"/>
+
   <!-- Open book right page -->
-  <path d="M17 8H25C25.5523 8 26 8.44772 26 9V23C26 23.5523 25.5523 24 25 24H17V8Z" fill="white" opacity="0.7"/>
-  
-  <!-- Book spine / center divider -->
-  <rect x="15" y="8" width="2" height="16" fill="#4F46E5" opacity="0.5"/>
-  
+  <path d="M17 9H25C25.5523 9 26 9.44772 26 10V22C26 22.5523 25.5523 23 25 23H17V9Z" fill="white" opacity="0.70"/>
+
+  <!-- Book spine -->
+  <rect x="15" y="9" width="2" height="14" fill="#6D28D9" opacity="0.4"/>
+
   <!-- Lines on left page -->
-  <rect x="8" y="12" width="5" height="1.5" rx="0.75" fill="#4F46E5" opacity="0.5"/>
-  <rect x="8" y="15" width="5" height="1.5" rx="0.75" fill="#4F46E5" opacity="0.5"/>
-  <rect x="8" y="18" width="3.5" height="1.5" rx="0.75" fill="#4F46E5" opacity="0.5"/>
-  
+  <rect x="8" y="13" width="5" height="1.5" rx="0.75" fill="#6D28D9" opacity="0.45"/>
+  <rect x="8" y="16" width="5" height="1.5" rx="0.75" fill="#6D28D9" opacity="0.45"/>
+  <rect x="8" y="19" width="3.5" height="1.5" rx="0.75" fill="#6D28D9" opacity="0.45"/>
+
   <!-- Lines on right page -->
-  <rect x="19" y="12" width="5" height="1.5" rx="0.75" fill="#312E81" opacity="0.4"/>
-  <rect x="19" y="15" width="5" height="1.5" rx="0.75" fill="#312E81" opacity="0.4"/>
-  <rect x="19" y="18" width="3.5" height="1.5" rx="0.75" fill="#312E81" opacity="0.4"/>
-  
-  <!-- AI spark dot (top right corner accent) -->
-  <circle cx="26" cy="6" r="3.5" fill="#A5B4FC"/>
-  <path d="M26 4L26.5 5.5L28 6L26.5 6.5L26 8L25.5 6.5L24 6L25.5 5.5L26 4Z" fill="#4F46E5"/>
+  <rect x="19" y="13" width="5" height="1.5" rx="0.75" fill="#4C1D95" opacity="0.35"/>
+  <rect x="19" y="16" width="5" height="1.5" rx="0.75" fill="#4C1D95" opacity="0.35"/>
+  <rect x="19" y="19" width="3.5" height="1.5" rx="0.75" fill="#4C1D95" opacity="0.35"/>
+
+  <!-- AI spark (top-right accent) -->
+  <circle cx="26" cy="6" r="3.5" fill="#A78BFA"/>
+  <path d="M26 4L26.6 5.4L28 6L26.6 6.6L26 8L25.4 6.6L24 6L25.4 5.4L26 4Z" fill="#6D28D9"/>
 </svg>

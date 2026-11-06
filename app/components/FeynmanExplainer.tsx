@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 import React, { useState } from 'react';
 import { 
   Lightbulb, 
@@ -116,7 +116,7 @@ export default function FeynmanExplainer() {
               onChange={(e) => setLevel(e.target.value)}
               className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-xs sm:text-sm text-slate-900 focus:bg-white focus:outline-none focus:ring-2 focus:ring-violet-500/20 focus:border-violet-500 transition"
             >
-              <option value="Pemula / ELI5">Pemula (ELI5 — Anak 10 Tahun)</option>
+              <option value="Pemula / ELI5">Pemula (ELI5 â€” Anak 10 Tahun)</option>
               <option value="Mahasiswa S1">Mahasiswa S1 (Standar Kuliah)</option>
               <option value="Teknikal mendalam">Teknikal Mendalam (Studi Kasus Industri)</option>
             </select>
@@ -203,12 +203,12 @@ export default function FeynmanExplainer() {
             {/* Demo Mode Banner */}
             {mode === 'fallback_demo' && (
               <div className="p-3 bg-amber-50 border border-amber-200 rounded-xl flex items-center gap-2 text-xs text-amber-800">
-                <span className="text-amber-500">⚡</span>
-                <span><strong>Mode Demo Cerdas</strong> — Ini adalah contoh penjelasan Feynman. Hubungkan API Key untuk penjelasan yang disesuaikan AI.</span>
+                <span className="text-amber-500">âš¡</span>
+                <span><strong>Mode Demo Cerdas</strong> â€” Ini adalah contoh penjelasan Feynman. Hubungkan API Key untuk penjelasan yang disesuaikan AI.</span>
               </div>
             )}
             {/* Featured Analogy Card */}
-            <div className="p-5 rounded-2xl bg-gradient-to-br from-violet-50/90 via-purple-50/50 to-indigo-50/80 border border-violet-200/80 relative overflow-hidden">
+            <div className="p-5 rounded-2xl bg-gradient-to-br from-violet-50/90 via-purple-50/50 to-brand-50/80 border border-violet-200/80 relative overflow-hidden">
               <Quote className="absolute -top-2 -right-2 w-16 h-16 text-violet-200/50 -rotate-12 pointer-events-none" />
               <div className="relative">
                 <span className="text-[10px] font-bold uppercase tracking-wider text-violet-700 bg-white/80 px-2 py-0.5 rounded-full border border-violet-200/60 inline-block mb-2">
@@ -256,8 +256,8 @@ export default function FeynmanExplainer() {
               </div>
 
               {/* Self Test Quiz */}
-              <div className="p-4 rounded-xl bg-indigo-50/70 border border-indigo-200/80 space-y-2">
-                <span className="text-[10px] font-bold text-indigo-700 uppercase tracking-wide flex items-center gap-1.5">
+              <div className="p-4 rounded-xl bg-brand-50/70 border border-brand-200/80 space-y-2">
+                <span className="text-[10px] font-bold text-brand-700 uppercase tracking-wide flex items-center gap-1.5">
                   <HelpCircle className="w-3.5 h-3.5" />
                   Kuis Uji Pemahaman Mandiri:
                 </span>
@@ -268,13 +268,13 @@ export default function FeynmanExplainer() {
                   <button
                     type="button"
                     onClick={() => setShowQuizHint(!showQuizHint)}
-                    className="inline-flex items-center gap-1.5 text-[11px] font-semibold text-indigo-700 hover:text-indigo-800"
+                    className="inline-flex items-center gap-1.5 text-[11px] font-semibold text-brand-700 hover:text-brand-800"
                   >
                     {showQuizHint ? <EyeOff className="w-3.5 h-3.5" /> : <Eye className="w-3.5 h-3.5" />}
                     <span>{showQuizHint ? 'Sembunyikan Petunjuk' : 'Lihat Kunci Evaluasi'}</span>
                   </button>
                   {showQuizHint && (
-                    <div className="mt-2 p-2.5 rounded-lg bg-white border border-indigo-200 text-xs text-slate-600 leading-relaxed animate-in fade-in">
+                    <div className="mt-2 p-2.5 rounded-lg bg-white border border-brand-200 text-xs text-slate-600 leading-relaxed animate-in fade-in">
                       Kunci: Jika Anda bisa menjawab pertanyaan ini menggunakan analogi restoran / mesin di atas tanpa rumus teknis, berarti pemahaman konsep Anda sudah kuat!
                     </div>
                   )}

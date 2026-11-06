@@ -9,11 +9,7 @@ import {
   Check, 
   ArrowRight, 
   ArrowLeft, 
-  X, 
-  ShieldCheck, 
-  Zap,
-  HelpCircle,
-  Laptop
+  X
 } from 'lucide-react';
 
 interface OnboardingProps {
@@ -26,7 +22,6 @@ export default function OnboardingModal({ isOpen, onClose, onSelectFeature }: On
   const [currentStep, setCurrentStep] = useState(0);
 
   useEffect(() => {
-    // Reset to step 0 when opened
     if (isOpen) {
       setCurrentStep(0);
     }
@@ -41,8 +36,8 @@ export default function OnboardingModal({ isOpen, onClose, onSelectFeature }: On
       subtitle: 'Platform asisten akademik & copilot persiapan ujian modern berbasis riset sains kognitif.',
       content: (
         <div className="space-y-4 py-2">
-          <div className="p-4 rounded-2xl bg-indigo-50/70 border border-indigo-100 flex items-start gap-3.5">
-            <div className="w-10 h-10 rounded-xl bg-indigo-600 text-white flex items-center justify-center shrink-0 shadow-sm shadow-indigo-200">
+          <div className="p-4 rounded-2xl bg-brand-50/70 border border-brand-100 flex items-start gap-3.5">
+            <div className="w-10 h-10 rounded-xl bg-brand-600 text-white flex items-center justify-center shrink-0 shadow-sm shadow-brand-200">
               <Sparkles className="w-5 h-5" />
             </div>
             <div>
@@ -50,14 +45,14 @@ export default function OnboardingModal({ isOpen, onClose, onSelectFeature }: On
                 Dirancang Khusus untuk Mahasiswa
               </h4>
               <p className="text-xs text-slate-600 leading-relaxed">
-                Lectura AI memecahkan 3 masalah utama perkuliahan: catatan tebal yang melelahkan (*cognitive overload*), ketidaktahuan atas tipe soal jebakan dosen, dan panik belajar di menit-menit akhir (&lt; 24 jam).
+                Lectura AI memecahkan 3 masalah utama perkuliahan: catatan tebal yang melelahkan (<em>cognitive overload</em>), ketidaktahuan atas tipe soal jebakan dosen, dan panik belajar di menit-menit akhir (&lt; 24 jam).
               </p>
             </div>
           </div>
 
           <div className="grid grid-cols-2 gap-2.5 text-left">
             <div className="p-3 rounded-xl bg-slate-50 border border-slate-200/70">
-              <span className="text-[10px] font-bold text-indigo-600 uppercase block mb-1">
+              <span className="text-[10px] font-bold text-brand-600 uppercase block mb-1">
                 Bertenaga AI Terkini
               </span>
               <p className="text-xs text-slate-700 font-medium">
@@ -88,7 +83,7 @@ export default function OnboardingModal({ isOpen, onClose, onSelectFeature }: On
               title: '01. Ringkas Catatan',
               desc: 'Pecah materi tebal jadi konsep kunci dan checklist 15-menit.',
               icon: BookOpen,
-              color: 'text-indigo-600 bg-indigo-50 border-indigo-100'
+              color: 'text-brand-600 bg-brand-50 border-brand-100'
             },
             {
               id: 'trap',
@@ -145,12 +140,12 @@ export default function OnboardingModal({ isOpen, onClose, onSelectFeature }: On
       content: (
         <div className="space-y-3 py-2 text-left">
           <div className="p-3 rounded-xl bg-slate-50 border border-slate-200/80 flex items-start gap-3">
-            <span className="w-6 h-6 rounded-md bg-indigo-600 text-white flex items-center justify-center text-xs font-bold shrink-0 mt-0.5">
+            <span className="w-6 h-6 rounded-md bg-brand-600 text-white flex items-center justify-center text-xs font-bold shrink-0 mt-0.5">
               1
             </span>
             <div>
               <h4 className="text-xs font-bold text-slate-900">
-                Gunakan Tombol "Contoh Catatan"
+                Gunakan Tombol &quot;Contoh Catatan&quot;
               </h4>
               <p className="text-[11px] text-slate-600 leading-relaxed mt-0.5">
                 Setiap modul memiliki preset materi kuliah siap pakai. Klik tombol contoh untuk melihat analisis dalam 1 detik tanpa perlu mengetik.
@@ -159,7 +154,7 @@ export default function OnboardingModal({ isOpen, onClose, onSelectFeature }: On
           </div>
 
           <div className="p-3 rounded-xl bg-slate-50 border border-slate-200/80 flex items-start gap-3">
-            <span className="w-6 h-6 rounded-md bg-indigo-600 text-white flex items-center justify-center text-xs font-bold shrink-0 mt-0.5">
+            <span className="w-6 h-6 rounded-md bg-brand-600 text-white flex items-center justify-center text-xs font-bold shrink-0 mt-0.5">
               2
             </span>
             <div>
@@ -173,7 +168,7 @@ export default function OnboardingModal({ isOpen, onClose, onSelectFeature }: On
           </div>
 
           <div className="p-3 rounded-xl bg-slate-50 border border-slate-200/80 flex items-start gap-3">
-            <span className="w-6 h-6 rounded-md bg-indigo-600 text-white flex items-center justify-center text-xs font-bold shrink-0 mt-0.5">
+            <span className="w-6 h-6 rounded-md bg-brand-600 text-white flex items-center justify-center text-xs font-bold shrink-0 mt-0.5">
               3
             </span>
             <div>
@@ -181,7 +176,7 @@ export default function OnboardingModal({ isOpen, onClose, onSelectFeature }: On
                 Salin & Ekspor Markdown (.md)
               </h4>
               <p className="text-[11px] text-slate-600 leading-relaxed mt-0.5">
-                Ekspor hasil dekonstruksi langsung ke Notion, Obsidian, atau cetak sebagai lembar persiapan ujian (*cheat-sheet* ringkas).
+                Ekspor hasil dekonstruksi langsung ke Notion, Obsidian, atau cetak sebagai lembar persiapan ujian (<em>cheat-sheet</em> ringkas).
               </p>
             </div>
           </div>
@@ -248,7 +243,7 @@ export default function OnboardingModal({ isOpen, onClose, onSelectFeature }: On
         {/* Header Bar */}
         <div className="px-5 sm:px-6 pt-5 pb-3 border-b border-slate-100 flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <span className="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full bg-indigo-50 text-indigo-700 border border-indigo-100">
+            <span className="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full bg-brand-50 text-brand-700 border border-brand-100">
               {current.badge}
             </span>
             <span className="text-xs text-slate-400 font-medium">
@@ -289,7 +284,7 @@ export default function OnboardingModal({ isOpen, onClose, onSelectFeature }: On
                 onClick={() => setCurrentStep(i)}
                 className={`h-1.5 rounded-full transition-all ${
                   i === currentStep
-                    ? 'w-6 bg-indigo-600'
+                    ? 'w-6 bg-brand-600'
                     : 'w-1.5 bg-slate-300 hover:bg-slate-400'
                 }`}
                 title={`Lompat ke langkah ${i + 1}`}
@@ -311,7 +306,7 @@ export default function OnboardingModal({ isOpen, onClose, onSelectFeature }: On
 
             <button
               onClick={handleNext}
-              className="px-4 py-2 rounded-xl text-xs font-semibold text-white bg-indigo-600 hover:bg-indigo-700 active:bg-indigo-800 transition shadow-sm shadow-indigo-200 flex items-center gap-1.5"
+              className="px-4 py-2 rounded-xl text-xs font-semibold text-white bg-brand-600 hover:bg-brand-700 active:bg-brand-800 transition shadow-sm shadow-brand-200 flex items-center gap-1.5"
             >
               <span>{currentStep === steps.length - 1 ? 'Mulai Sekarang' : 'Lanjut'}</span>
               <ArrowRight className="w-3.5 h-3.5" />
@@ -323,4 +318,3 @@ export default function OnboardingModal({ isOpen, onClose, onSelectFeature }: On
     </div>
   );
 }
-

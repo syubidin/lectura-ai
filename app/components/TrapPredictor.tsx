@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 import React, { useState } from 'react';
 import { 
   Target, 
@@ -65,7 +65,7 @@ export default function TrapPredictor() {
   };
 
   const copyTrap = (idx: number, trap: any) => {
-    const text = `SOAL JEBAKAN: "${trap.question}"\n❌ Kesalahan Umum: ${trap.commonMistake}\n✅ Konsep Benar: ${trap.correctConcept}\n💡 Pro Tip: ${trap.proTip}`;
+    const text = `SOAL JEBAKAN: "${trap.question}"\nâŒ Kesalahan Umum: ${trap.commonMistake}\nâœ… Konsep Benar: ${trap.correctConcept}\nðŸ’¡ Pro Tip: ${trap.proTip}`;
     navigator.clipboard.writeText(text);
     setCopiedIdx(idx);
     setTimeout(() => setCopiedIdx(null), 2000);
@@ -140,9 +140,9 @@ export default function TrapPredictor() {
                   className="w-full text-left p-2 rounded-lg bg-slate-50 hover:bg-slate-100 border border-slate-200/60 text-xs transition flex items-center justify-between group"
                 >
                   <span className="text-slate-700 font-medium truncate">
-                    {p.course} — <span className="text-slate-500">{p.topic}</span>
+                    {p.course} â€” <span className="text-slate-500">{p.topic}</span>
                   </span>
-                  <span className="text-indigo-600 opacity-0 group-hover:opacity-100 text-[10px] font-semibold shrink-0 ml-2">
+                  <span className="text-brand-600 opacity-0 group-hover:opacity-100 text-[10px] font-semibold shrink-0 ml-2">
                     Pilih
                   </span>
                 </button>
@@ -276,7 +276,7 @@ export default function TrapPredictor() {
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs pt-1">
                       <div className="p-3 rounded-lg bg-rose-50/60 border border-rose-100 space-y-1">
                         <span className="text-[10px] font-bold text-rose-700 uppercase tracking-wide block">
-                          ✕ Kesalahan Umum Mahasiswa
+                          âœ• Kesalahan Umum Mahasiswa
                         </span>
                         <p className="text-slate-700 leading-relaxed text-[11px] sm:text-xs">
                           {trap.commonMistake}
@@ -285,7 +285,7 @@ export default function TrapPredictor() {
 
                       <div className="p-3 rounded-lg bg-emerald-50/60 border border-emerald-100 space-y-1">
                         <span className="text-[10px] font-bold text-emerald-700 uppercase tracking-wide block">
-                          ✓ Konsep & Jawaban Benar
+                          âœ“ Konsep & Jawaban Benar
                         </span>
                         <p className="text-slate-700 leading-relaxed text-[11px] sm:text-xs">
                           {trap.correctConcept}
@@ -294,8 +294,8 @@ export default function TrapPredictor() {
                     </div>
 
                     {/* Pro Tip */}
-                    <div className="flex items-center gap-2 p-2.5 rounded-lg bg-indigo-50/60 border border-indigo-100 text-xs text-indigo-900 font-medium">
-                      <Lightbulb className="w-4 h-4 text-indigo-600 shrink-0" />
+                    <div className="flex items-center gap-2 p-2.5 rounded-lg bg-brand-50/60 border border-brand-100 text-xs text-brand-900 font-medium">
+                      <Lightbulb className="w-4 h-4 text-brand-600 shrink-0" />
                       <span><strong>Tips Taktis:</strong> {trap.proTip}</span>
                     </div>
 

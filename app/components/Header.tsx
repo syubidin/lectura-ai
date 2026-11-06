@@ -12,10 +12,8 @@ import {
   Target,
   Clock,
   Lightbulb,
-  ExternalLink,
   HelpCircle,
   Menu,
-  ChevronRight,
   Home
 } from 'lucide-react';
 
@@ -112,13 +110,13 @@ export default function Header({ activeTab, setActiveTab, onOpenOnboarding, onBa
               className={`flex items-center gap-3 ${onBackToLanding ? 'cursor-pointer group' : ''}`}
               title={onBackToLanding ? 'Kembali ke Beranda Utama' : undefined}
             >
-              <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-indigo-600 via-indigo-500 to-violet-500 flex items-center justify-center text-white shadow-sm shadow-indigo-200 group-hover:scale-105 transition">
+              <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-brand-700 via-brand-600 to-violet-500 flex items-center justify-center text-white shadow-sm shadow-brand-200 group-hover:scale-105 transition">
                 <BookOpen className="w-5 h-5" />
               </div>
               <div className="flex flex-col">
                 <div className="flex items-center gap-2">
-                  <span className="font-bold text-base sm:text-lg tracking-tight text-slate-900 group-hover:text-indigo-600 transition">
-                    Lectura<span className="text-indigo-600 font-extrabold">AI</span>
+                  <span className="font-bold text-base sm:text-lg tracking-tight text-slate-900 group-hover:text-brand-600 transition">
+                    Lectura<span className="text-brand-600 font-extrabold">AI</span>
                   </span>
                   <span className="text-[10px] font-semibold px-1.5 py-0.5 rounded-full bg-slate-100 text-slate-600 border border-slate-200/60">
                     Academic
@@ -141,13 +139,13 @@ export default function Header({ activeTab, setActiveTab, onOpenOnboarding, onBa
                     onClick={() => setActiveTab(item.id)}
                     className={`p-2 rounded-lg transition-all duration-150 relative group ${
                       isActive
-                        ? 'bg-white text-indigo-700 shadow-sm shadow-slate-200 border border-slate-200/60'
+                        ? 'bg-white text-brand-700 shadow-sm shadow-slate-200 border border-slate-200/60'
                         : 'text-slate-500 hover:text-slate-900 hover:bg-slate-200/50'
                     }`}
                     title={item.label}
                     aria-label={item.label}
                   >
-                    <Icon className={`w-4 h-4 ${isActive ? 'text-indigo-600' : 'text-slate-500'}`} />
+                    <Icon className={`w-4 h-4 ${isActive ? 'text-brand-600' : 'text-slate-500'}`} />
                     
                     {/* Tooltip on hover */}
                     <span className="pointer-events-none absolute -bottom-8 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-md bg-slate-900 px-2 py-0.5 text-[10px] font-medium text-white opacity-0 shadow-sm transition-opacity group-hover:opacity-100 z-50">
@@ -167,7 +165,7 @@ export default function Header({ activeTab, setActiveTab, onOpenOnboarding, onBa
                   className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-medium border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 transition shadow-xs"
                   title="Buka panduan penggunaan aplikasi"
                 >
-                  <HelpCircle className="w-3.5 h-3.5 text-indigo-600" />
+                  <HelpCircle className="w-3.5 h-3.5 text-brand-600" />
                   <span>Panduan</span>
                 </button>
               )}
@@ -239,19 +237,19 @@ export default function Header({ activeTab, setActiveTab, onOpenOnboarding, onBa
                     }}
                     className={`w-full flex items-center justify-between px-3 py-2.5 rounded-xl text-xs font-semibold transition ${
                       isActive
-                        ? 'bg-indigo-50 text-indigo-700 border border-indigo-200/60'
+                        ? 'bg-brand-50 text-brand-700 border border-brand-200/60'
                         : 'text-slate-700 hover:bg-slate-100'
                     }`}
                   >
                     <div className="flex items-center gap-2.5">
                       <div className={`w-7 h-7 rounded-lg flex items-center justify-center ${
-                        isActive ? 'bg-indigo-600 text-white' : 'bg-slate-100 text-slate-600'
+                        isActive ? 'bg-brand-600 text-white' : 'bg-slate-100 text-slate-600'
                       }`}>
                         <Icon className="w-4 h-4" />
                       </div>
                       <span>{item.label}</span>
                     </div>
-                    {isActive && <span className="text-[10px] bg-indigo-600 text-white px-2 py-0.5 rounded-full font-medium">Aktif</span>}
+                    {isActive && <span className="text-[10px] bg-brand-600 text-white px-2 py-0.5 rounded-full font-medium">Aktif</span>}
                   </button>
                 );
               })}
@@ -265,7 +263,7 @@ export default function Header({ activeTab, setActiveTab, onOpenOnboarding, onBa
                     }}
                     className="w-full flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-medium text-slate-700 hover:bg-slate-100 transition"
                   >
-                    <HelpCircle className="w-4 h-4 text-indigo-600" />
+                    <HelpCircle className="w-4 h-4 text-brand-600" />
                     <span>Panduan Penggunaan</span>
                   </button>
                 )}
@@ -276,10 +274,10 @@ export default function Header({ activeTab, setActiveTab, onOpenOnboarding, onBa
                       onBackToLanding();
                       setMobileMenuOpen(false);
                     }}
-                    className="w-full flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-medium text-indigo-600 hover:bg-indigo-50 transition"
+                    className="w-full flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-medium text-brand-600 hover:bg-brand-50 transition"
                   >
                     <Home className="w-4 h-4" />
-                    <span>Kembali ke Beranda Proyek</span>
+                    <span>Kembali ke Beranda Utama</span>
                   </button>
                 )}
               </div>
@@ -327,7 +325,7 @@ export default function Header({ activeTab, setActiveTab, onOpenOnboarding, onBa
 
               <div className="flex justify-between items-center py-1 border-b border-slate-200/50">
                 <span className="text-slate-500 flex items-center gap-1.5">
-                  <Sparkles className="w-3.5 h-3.5 text-indigo-500" />
+                  <Sparkles className="w-3.5 h-3.5 text-brand-500" />
                   Model Aktif:
                 </span>
                 <span className="font-mono font-medium text-slate-800 bg-white px-2 py-0.5 rounded border border-slate-200">
@@ -353,7 +351,7 @@ export default function Header({ activeTab, setActiveTab, onOpenOnboarding, onBa
               </div>
             </div>
 
-            <div className="mt-4 p-3 rounded-lg bg-indigo-50/60 border border-indigo-100 text-[11px] text-indigo-900 leading-relaxed">
+            <div className="mt-4 p-3 rounded-lg bg-brand-50/60 border border-brand-100 text-[11px] text-brand-900 leading-relaxed">
               <strong>Info:</strong> API Key terbaca dari file <code>.env.local</code>. Ketika terhubung, setiap permintaan akan diproses langsung oleh model <strong>Gemini 3 Flash</strong> dengan fitur auto-fallback ke model cadangan jika terjadi lonjakan beban.
             </div>
 
@@ -361,7 +359,7 @@ export default function Header({ activeTab, setActiveTab, onOpenOnboarding, onBa
               <button
                 onClick={checkStatus}
                 disabled={status.loading}
-                className="flex-1 flex items-center justify-center gap-2 px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl text-xs font-semibold transition disabled:opacity-50"
+                className="flex-1 flex items-center justify-center gap-2 px-4 py-2 bg-brand-600 hover:bg-brand-700 text-white rounded-xl text-xs font-semibold transition disabled:opacity-50"
               >
                 <RefreshCw className={`w-3.5 h-3.5 ${status.loading ? 'animate-spin' : ''}`} />
                 {status.loading ? 'Memeriksa...' : 'Cek Ulang Koneksi'}
