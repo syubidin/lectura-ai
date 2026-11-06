@@ -8,31 +8,59 @@ import CramPlan from './components/CramPlan';
 import FeynmanExplainer from './components/FeynmanExplainer';
 import Footer from './components/Footer';
 import OnboardingModal from './components/OnboardingModal';
+import LandingPage from './components/LandingPage';
 
 export default function Home() {
+  const [inApp, setInApp] = useState(false);
   const [activeTab, setActiveTab] = useState('deconstruct');
   const [showOnboarding, setShowOnboarding] = useState(false);
 
   useEffect(() => {
-    // Show onboarding for first-time visitors
+    // Check if user already entered app before in current session
     try {
-      const hasSeen = localStorage.getItem('lectura_onboarding_completed');
-      if (!hasSeen) {
-        // Small delay for smooth render
-        const timer = setTimeout(() => setShowOnboarding(true), 600);
-        return () => clearTimeout(timer);
+      const entered = sessionStorage.getItem('lectura_entered_app');
+      if (entered === 'true') {
+        setInApp(true);
       }
     } catch {}
   }, []);
 
+  const handleEnterApp = (featureId?: string) => {
+    setInApp(true);
+    if (featureId) setActiveTab(featureId);
+    try {
+      sessionStorage.setItem('lectura_entered_app', 'true');
+    } catch {}
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const handleBackToLanding = () => {
+    setInApp(false);
+    try {
+      sessionStorage.removeItem('lectura_entered_app');
+    } catch {}
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  // If on Landing Page (first view)
+  if (!inApp) {
+    return (
+      <LandingPage 
+        onEnterApp={() => handleEnterApp()}
+        onOpenFeature={(featureId) => handleEnterApp(featureId)}
+      />
+    );
+  }
+
   return (
     <div className="min-h-screen flex flex-col bg-slate-50 text-slate-900">
       
-      {/* Minimalist Top Header with Onboarding Button */}
+      {/* Minimalist Top Header with Onboarding Button & Back to Landing */}
       <Header
         activeTab={activeTab}
         setActiveTab={setActiveTab}
         onOpenOnboarding={() => setShowOnboarding(true)}
+        onBackToLanding={handleBackToLanding}
       />
 
       {/* Main Content Area */}

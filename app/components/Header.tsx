@@ -20,6 +20,7 @@ interface HeaderProps {
   activeTab: string;
   setActiveTab: (tab: string) => void;
   onOpenOnboarding?: () => void;
+  onBackToLanding?: () => void;
 }
 
 interface ApiStatus {
@@ -32,7 +33,7 @@ interface ApiStatus {
   maskedKey: string;
 }
 
-export default function Header({ activeTab, setActiveTab, onOpenOnboarding }: HeaderProps) {
+export default function Header({ activeTab, setActiveTab, onOpenOnboarding, onBackToLanding }: HeaderProps) {
   const [status, setStatus] = useState<ApiStatus>({
     loading: true,
     connected: false,
@@ -102,13 +103,17 @@ export default function Header({ activeTab, setActiveTab, onOpenOnboarding }: He
           <div className="flex items-center justify-between h-16 gap-4">
             
             {/* Brand Logo */}
-            <div className="flex items-center gap-3">
-              <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-indigo-600 via-indigo-500 to-violet-500 flex items-center justify-center text-white shadow-sm shadow-indigo-200">
+            <div 
+              onClick={onBackToLanding}
+              className={`flex items-center gap-3 ${onBackToLanding ? 'cursor-pointer group' : ''}`}
+              title={onBackToLanding ? 'Kembali ke Beranda Utama' : undefined}
+            >
+              <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-indigo-600 via-indigo-500 to-violet-500 flex items-center justify-center text-white shadow-sm shadow-indigo-200 group-hover:scale-105 transition">
                 <BookOpen className="w-5 h-5" />
               </div>
               <div className="flex flex-col">
                 <div className="flex items-center gap-2">
-                  <span className="font-bold text-base sm:text-lg tracking-tight text-slate-900">
+                  <span className="font-bold text-base sm:text-lg tracking-tight text-slate-900 group-hover:text-indigo-600 transition">
                     Lectura<span className="text-indigo-600 font-extrabold">AI</span>
                   </span>
                   <span className="text-[10px] font-semibold px-1.5 py-0.5 rounded-full bg-slate-100 text-slate-600 border border-slate-200/60">
@@ -145,6 +150,16 @@ export default function Header({ activeTab, setActiveTab, onOpenOnboarding }: He
 
             {/* Header Right Actions */}
             <div className="flex items-center gap-2">
+              {onBackToLanding && (
+                <button
+                  onClick={onBackToLanding}
+                  className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 transition"
+                  title="Kembali ke halaman profil tim dan proyek"
+                >
+                  <span>Beranda Proyek</span>
+                </button>
+              )}
+
               {onOpenOnboarding && (
                 <button
                   onClick={onOpenOnboarding}
