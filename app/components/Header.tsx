@@ -13,7 +13,10 @@ import {
   Clock,
   Lightbulb,
   ExternalLink,
-  HelpCircle
+  HelpCircle,
+  Menu,
+  ChevronRight,
+  Home
 } from 'lucide-react';
 
 interface HeaderProps {
@@ -34,6 +37,7 @@ interface ApiStatus {
 }
 
 export default function Header({ activeTab, setActiveTab, onOpenOnboarding, onBackToLanding }: HeaderProps) {
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [status, setStatus] = useState<ApiStatus>({
     loading: true,
     connected: false,
@@ -126,8 +130,8 @@ export default function Header({ activeTab, setActiveTab, onOpenOnboarding, onBa
               </div>
             </div>
 
-            {/* Desktop Navigation Tabs */}
-            <nav className="hidden md:flex items-center p-1 bg-slate-100/80 rounded-xl border border-slate-200/60">
+            {/* Desktop Navigation Tabs - Icon Only */}
+            <nav className="hidden md:flex items-center p-1 bg-slate-100/80 rounded-xl border border-slate-200/60 gap-0.5">
               {navItems.map((item) => {
                 const Icon = item.icon;
                 const isActive = activeTab === item.id;
@@ -135,14 +139,20 @@ export default function Header({ activeTab, setActiveTab, onOpenOnboarding, onBa
                   <button
                     key={item.id}
                     onClick={() => setActiveTab(item.id)}
-                    className={`flex items-center gap-2 px-3.5 py-1.5 rounded-lg text-xs font-semibold transition-all duration-150 ${
+                    className={`p-2 rounded-lg transition-all duration-150 relative group ${
                       isActive
-                        ? 'bg-white text-indigo-700 shadow-sm shadow-slate-200 border border-slate-200/50'
-                        : 'text-slate-600 hover:text-slate-900 hover:bg-slate-200/50'
+                        ? 'bg-white text-indigo-700 shadow-sm shadow-slate-200 border border-slate-200/60'
+                        : 'text-slate-500 hover:text-slate-900 hover:bg-slate-200/50'
                     }`}
+                    title={item.label}
+                    aria-label={item.label}
                   >
-                    <Icon className={`w-3.5 h-3.5 ${isActive ? 'text-indigo-600' : 'text-slate-400'}`} />
-                    <span>{item.label}</span>
+                    <Icon className={`w-4 h-4 ${isActive ? 'text-indigo-600' : 'text-slate-500'}`} />
+                    
+                    {/* Tooltip on hover */}
+                    <span className="pointer-events-none absolute -bottom-8 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-md bg-slate-900 px-2 py-0.5 text-[10px] font-medium text-white opacity-0 shadow-sm transition-opacity group-hover:opacity-100 z-50">
+                      {item.label}
+                    </span>
                   </button>
                 );
               })}
@@ -150,27 +160,19 @@ export default function Header({ activeTab, setActiveTab, onOpenOnboarding, onBa
 
             {/* Header Right Actions */}
             <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
-              {onBackToLanding && (
-                <button
-                  onClick={onBackToLanding}
-                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-medium border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 transition shadow-xs"
-                  title="Kembali ke halaman profil tim dan proyek"
-                >
-                  <span>Beranda</span>
-                </button>
-              )}
-
+              {/* Panduan Button */}
               {onOpenOnboarding && (
                 <button
                   onClick={onOpenOnboarding}
-                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-medium border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 transition shadow-xs"
+                  className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-medium border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 transition shadow-xs"
                   title="Buka panduan penggunaan aplikasi"
                 >
                   <HelpCircle className="w-3.5 h-3.5 text-indigo-600" />
-                  <span className="hidden sm:inline">Panduan</span>
+                  <span>Panduan</span>
                 </button>
               )}
 
+              {/* Status AI Modal Pill */}
               <button
                 onClick={() => setShowStatusModal(true)}
                 className={`flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl text-xs font-medium border transition-all shadow-xs ${
@@ -204,31 +206,85 @@ export default function Header({ activeTab, setActiveTab, onOpenOnboarding, onBa
                     : 'Mode Demo'}
                 </span>
               </button>
+
+              {/* Mobile Hamburger Button */}
+              <button
+                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                className="md:hidden p-2 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 transition shadow-xs"
+                title="Buka menu navigasi"
+                aria-label="Buka menu navigasi"
+              >
+                {mobileMenuOpen ? <X className="w-4 h-4" /> : <Menu className="w-4 h-4" />}
+              </button>
             </div>
 
           </div>
 
-          {/* Mobile Navigation Tabs */}
-          <div className="md:hidden flex items-center gap-1 overflow-x-auto py-2 border-t border-slate-100 no-scrollbar">
-            {navItems.map((item) => {
-              const Icon = item.icon;
-              const isActive = activeTab === item.id;
-              return (
-                <button
-                  key={item.id}
-                  onClick={() => setActiveTab(item.id)}
-                  className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium whitespace-nowrap transition-all ${
-                    isActive
-                      ? 'bg-indigo-600 text-white shadow-sm'
-                      : 'bg-slate-100 text-slate-600 hover:bg-slate-200/70'
-                  }`}
-                >
-                  <Icon className="w-3.5 h-3.5" />
-                  <span>{item.label}</span>
-                </button>
-              );
-            })}
-          </div>
+          {/* Mobile Drawer / Hamburger Dropdown */}
+          {mobileMenuOpen && (
+            <div className="md:hidden py-3 px-2 border-t border-slate-200/80 bg-white/95 backdrop-blur-md rounded-b-2xl shadow-lg space-y-1 animate-in slide-in-from-top-2 duration-150">
+              <p className="text-[10px] font-bold uppercase tracking-wider text-slate-400 px-3 py-1">
+                Pilih Modul Belajar
+              </p>
+              
+              {navItems.map((item) => {
+                const Icon = item.icon;
+                const isActive = activeTab === item.id;
+                return (
+                  <button
+                    key={item.id}
+                    onClick={() => {
+                      setActiveTab(item.id);
+                      setMobileMenuOpen(false);
+                    }}
+                    className={`w-full flex items-center justify-between px-3 py-2.5 rounded-xl text-xs font-semibold transition ${
+                      isActive
+                        ? 'bg-indigo-50 text-indigo-700 border border-indigo-200/60'
+                        : 'text-slate-700 hover:bg-slate-100'
+                    }`}
+                  >
+                    <div className="flex items-center gap-2.5">
+                      <div className={`w-7 h-7 rounded-lg flex items-center justify-center ${
+                        isActive ? 'bg-indigo-600 text-white' : 'bg-slate-100 text-slate-600'
+                      }`}>
+                        <Icon className="w-4 h-4" />
+                      </div>
+                      <span>{item.label}</span>
+                    </div>
+                    {isActive && <span className="text-[10px] bg-indigo-600 text-white px-2 py-0.5 rounded-full font-medium">Aktif</span>}
+                  </button>
+                );
+              })}
+
+              <div className="pt-2 mt-2 border-t border-slate-100 space-y-1">
+                {onOpenOnboarding && (
+                  <button
+                    onClick={() => {
+                      onOpenOnboarding();
+                      setMobileMenuOpen(false);
+                    }}
+                    className="w-full flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-medium text-slate-700 hover:bg-slate-100 transition"
+                  >
+                    <HelpCircle className="w-4 h-4 text-indigo-600" />
+                    <span>Panduan Penggunaan</span>
+                  </button>
+                )}
+
+                {onBackToLanding && (
+                  <button
+                    onClick={() => {
+                      onBackToLanding();
+                      setMobileMenuOpen(false);
+                    }}
+                    className="w-full flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-medium text-indigo-600 hover:bg-indigo-50 transition"
+                  >
+                    <Home className="w-4 h-4" />
+                    <span>Kembali ke Beranda Proyek</span>
+                  </button>
+                )}
+              </div>
+            </div>
+          )}
 
         </div>
       </header>

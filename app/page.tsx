@@ -30,12 +30,16 @@ export default function Home() {
     if (featureId) setActiveTab(featureId);
     try {
       sessionStorage.setItem('lectura_entered_app', 'true');
+      
+      // Onboarding HANYA muncul saat pertama kali pengguna masuk ke aplikasi
+      const completed = localStorage.getItem('lectura_onboarding_completed');
+      if (!completed) {
+        setTimeout(() => {
+          setShowOnboarding(true);
+        }, 350);
+      }
     } catch {}
     window.scrollTo({ top: 0, behavior: 'smooth' });
-    // Pastikan onboarding terbuka ketika pengguna masuk ke dalam aplikasi
-    setTimeout(() => {
-      setShowOnboarding(true);
-    }, 250);
   };
 
   const handleBackToLanding = () => {
