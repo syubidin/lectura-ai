@@ -1,107 +1,109 @@
 # 🎓 Lectura AI — Modern Academic Copilot & Cognitive Learning Engine
 
-> **Bantu mahasiswa menguasai materi kuliah rumit, membongkar soal jebakan ujian dosen, dan menyusun rencana belajar kilat secara presisi bertenaga Google Gemini AI.**
+> **Platform AI Copilot akademik modern berbasis riset kognitif untuk mendekomposisi materi perkuliahan, memprediksi jebakan soal ujian dosen, menyusun rencana belajar 24 jam berbasis Pareto 80/20, dan menyederhanakan teori kompleks menggunakan metode Richard Feynman.**
 
-[![Next.js](https://img.shields.io/badge/Framework-Next.js%2016-black?style=for-the-badge&logo=nextdotjs)](https://nextjs.org/)
-[![TypeScript](https://img.shields.io/badge/Language-TypeScript%205-blue?style=for-the-badge&logo=typescript)](https://www.typescriptlang.org/)
-[![Tailwind CSS](https://img.shields.io/badge/Styling-Tailwind%20CSS-06B6D4?style=for-the-badge&logo=tailwindcss)](https://tailwindcss.com/)
-[![Google Gemini](https://img.shields.io/badge/AI%20Engine-Gemini%203%20Flash-4285F4?style=for-the-badge&logo=google)](https://aistudio.google.com/)
-[![Security](https://img.shields.io/badge/Security-Zod%20%2B%20Sanitized-10B981?style=for-the-badge)](https://zod.dev/)
-[![Author](https://img.shields.io/badge/Author-syubidin-indigo?style=for-the-badge&logo=github)](https://github.com/syubidin)
+---
+
+[![Next.js](https://img.shields.io/badge/Framework-Next.js%2016-000000?style=for-the-badge&logo=nextdotjs&logoColor=white)](https://nextjs.org/)
+[![TypeScript](https://img.shields.io/badge/Language-TypeScript%205-3178C6?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![Tailwind CSS](https://img.shields.io/badge/Styling-Tailwind%20CSS-38B2AC?style=for-the-badge&logo=tailwindcss&logoColor=white)](https://tailwindcss.com/)
+[![GSAP](https://img.shields.io/badge/Animation-GSAP%203-88CE02?style=for-the-badge&logo=greensock&logoColor=white)](https://greensock.com/gsap/)
+[![Google Gemini](https://img.shields.io/badge/AI%20Engine-Gemini%203%20Flash-4285F4?style=for-the-badge&logo=google&logoColor=white)](https://aistudio.google.com/)
+[![Security](https://img.shields.io/badge/Validation-Zod%20Schema-3E67B1?style=for-the-badge&logo=zod&logoColor=white)](https://zod.dev/)
+[![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)](LICENSE)
+
+---
+
+## 📸 Antarmuka & Cuplikan Layar (Screenshots)
+
+### 1. Landing Page — Presentasi & Navigasi Interaktif
+![Lectura AI Landing Page](public/landing-page.png)
+*Tampilan Landing Page dengan Academic App Color Palette (Chambray, Bermuda Gray, Pigeon Post, Ronchi, dan Zest), tipografi Space Grotesk, dan animasi entrance GSAP yang halus.*
+
+### 2. Workspace Aplikasi & Fitur Modul
+![Lectura AI Workspace](public/usage-example.png)
+*Workspace terfokus dengan bilah Segmented Control yang ramping, ramah layar ponsel/desktop (anti-cluttered), serta komparasi analisis instan.*
 
 ---
 
 ## 🌟 Mengapa Lectura AI?
 
-Perkuliahan modern menghadapkan mahasiswa pada 3 tantangan kognitif besar:
-1. **Beban Kognitif Berlebih (*Information Overload*)**: Catatan kuliah puluhan halaman dan slide PDF padat teks yang melelahkan otak jika dibaca ulang dari awal.
-2. **Soal Jebakan Dosen (*Exam Traps*)**: Banyak mahasiswa gagal di ujian bukan karena tidak belajar, melainkan karena terkecoh oleh batas kondisi (*edge cases*) dan pertanyaan bertrik tinggi yang sengaja dipasang pembuat soal.
-3. **Kepanikan H-1 Ujian (&lt; 24 Jam)**: Belajar sistem kebut semalam sering berakhir *burnout* karena tidak adanya strategi prioritas yang berbasis sains kognitif.
+Perkuliahan dan persiapan ujian seringkali menimbulkan hambatan belajar:
+1. **Information & Cognitive Overload**: Catatan tebal puluhan lembar dan slide presentasi padat yang melelahkan jika dibaca ulang tanpa struktur.
+2. **Soal Jebakan Dosen (*Exam Traps*)**: Pertanyaan mengecoh (*edge cases* / trik logika) yang sering menggugurkan nilai mahasiswa saat ujian.
+3. **Kepanikan H-1 Ujian (&lt; 24 Jam)**: Belajar sistem kebut semalam (SKS) yang tidak terarah dan berisiko memicu kelelahan otak (*burnout*).
 
-**Lectura AI** hadir sebagai *full-stack web application* dengan estetika minimalis, bersih, dan berstandar industri modern (terinspirasi dari *design system* Notion AI & Linear), mengubah materi padat menjadi modul aksi nyata yang terukur.
-
----
-
-## ⚡ 4 Modul Unggulan (Superpowers)
-
-### 1. 📖 Syllabus & Note Deconstructor (Ringkas Catatan 15-Menit)
-* Mengurai teks catatan kuliah atau slide PDF yang rumit menjadi **Konsep Kunci Berbobot** (*Krusial*, *Penting*, *Dasar*).
-* Membaginya menjadi **Sesi Belajar 15-Menit (*Bite-Sized Modules*)** yang dilengkapi *checklist* interaktif agar mahasiswa dapat mencentang progres belajarnya.
-* Mengekstrak **Kaidah & Rumus Utama** dengan tombol 1-klik salin (*copy-to-clipboard*).
-* Ekspor ringkasan langsung ke format **Markdown (.md)** untuk disimpan di Notion atau Obsidian.
-
-### 2. 🎯 Exam Trap Predictor (Prediksi Soal Jebakan Dosen)
-* Menganalisis mata kuliah dan topik tertentu dari **sudut pandang pembuat soal (dosen)**.
-* Membongkar **Mindset Peringatan Ujian**: mengapa dosen sering menguji topik tersebut dan trik apa yang biasa digunakan.
-* Menampilkan komparasi berdampingan:
-  * ❌ **Kesalahan Umum Mahasiswa** (*Common Traps*)
-  * ✅ **Konsep & Kunci Jawaban Benar**
-  * 💡 **Pro-Tip Taktis** pengerjaan soal pilihan ganda maupun esai.
-
-### 3. ⏱️ 24-Hour Cram-Proof Action Plan (Jadwal Belajar Darurat)
-* Menggunakan **Prinsip Pareto 80/20**: menguasai 20% topik kunci yang menghasilkan 80% bobot nilai ujian.
-* Dilengkapi *Interactive Time Slider* (2 hingga 24 Jam) dengan indikator otomatis (*Mode Panik*, *Akselerasi Intensif*, atau *Terstruktur*).
-* Memetakan alokasi **Energi Kognitif (*HIGH*, *MEDIUM*, *RECOVERY*)** jam demi jam.
-* Panduan wajib jendela istirahat/tidur agar hipokampus otak dapat mengonsolidasi memori jangka pendek menjadi memori jangka panjang.
-
-### 4. 💡 Feynman Technique Explainer (Tutor Analogi Sederhana)
-* Mengadopsi teknik pembelajaran fisikawan peraih Nobel **Richard Feynman**: jika Anda tidak bisa menjelaskannya dengan sederhana, berarti Anda belum memahaminya.
-* Menerjemahkan teori abstrak menjadi **Analogi Dunia Nyata** yang sangat intuitif.
-* Dekonstruksi konsep langkah demi langkah tanpa jargon membingungkan.
-* Mengoreksi miskonsepsi terbesar serta menyediakan **Kuis Mandiri Interaktif** dengan tombol intip kunci evaluasi (*reveal hint*).
+**Lectura AI** memecahkan masalah tersebut dengan menyatukan metodologi psikologi kognitif teruji ke dalam 4 modul cerdas.
 
 ---
 
-## 🎨 Filosofi Desain UI/UX
+## ⚡ 4 Modul Unggulan (Core Instruments)
 
-* **Minimalist & Calm Aesthetic**: Mengutamakan kenyamanan mata mahasiswa saat membaca dengan palet lembut (`slate-50`, putih murni, dan aksen `indigo-600`).
-* **Interactive Onboarding Walkthrough**: Panduan interaktif 4 langkah untuk pengguna baru dengan navigasi touch/klik yang ramah di perangkat *mobile* dan *desktop*.
-* **Real-time Diagnostic Header**: Dilengkapi pill status AI yang berkedip hijau lembut saat terhubung ke Google AI Studio, menampilkan latensi respons milidetik dan jendela diagnostik.
-* **1-Click Quick Presets**: Setiap modul memiliki tombol contoh materi siap pakai, memungkinkan presentasi demo ke klien dalam 1 detik tanpa perlu mengetik panjang.
-* **Aksesibilitas & Pintasan**: Dukungan tombol pintas <kbd>Ctrl + Enter</kbd> untuk memproses catatan kuliah seketika.
+| Modul | Teori / Metodologi | Fungsi Utama |
+| :--- | :--- | :--- |
+| **01. Dekonstruksi Catatan** | *Chunking Theory* (George A. Miller) | Memecah teks tebal menjadi konsep kunci berbobot dan modul belajar 15-menit dengan checklist progres. Ekspor hasil ke Markdown (.md). |
+| **02. Prediksi Soal Jebakan** | *Error-Driven Learning* & *Examiner Mindset* | Memetakan sudut pandang pembuat soal (dosen), mendeteksi jebakan kondisi batas (*edge cases*), dan menyajikan kunci pembenarannya. |
+| **03. Rencana Belajar 24-Jam** | *Prinsip Pareto 80/20 & Sleep Consolidation* | Mengalokasikan 20% topik vital penentu 80% nilai ujian, membagi jadwal jam demi jam berdasarkan energi kognitif, serta jadwal istirahat wajib. |
+| **04. Metode Richard Feynman** | *Mental Models & Analogy Learning* | Menjelaskan rumus atau teori abstrak menjadi analogi dunia nyata tanpa jargon teknis, lengkap dengan kuis uji pemahaman mandiri. |
 
 ---
 
-## 🛠️ Tech Stack & Arsitektur
+## 🎨 Identitas Desain & UI/UX
+
+* **Academic App Color Palette**:
+  * **Chambray (`#38598a`)**: Warna primer berkarakter akademis elegan untuk aksi utama dan identitas brand.
+  * **Bermuda Gray (`#718da2`)**: Aksen sekunder untuk badge dan garis pembatas.
+  * **Pigeon Post (`#a7c4d7`)**: Latar belakang lembut untuk modul kartu.
+  * **Ronchi (`#f0c74c`)**: Aksen emas hangat untuk sorotan dan indikator darurat.
+  * **Zest (`#e57e24`)**: Aksen kontras berenergi tinggi untuk penanda jebakan ujian.
+* **Tipografi Modern**: **Space Grotesk** (geometrik akademis) + **JetBrains Mono** (kode & metrik waktu).
+* **Animasi Ringan (GSAP)**: Transisi mulus yang menghormati preferensi aksesibilitas `prefers-reduced-motion`.
+* **Mobile-First & Anti-Cluttered**: Segmented Control Bar hemat ruang yang mendukung *horizontal scroll* pada layar ponsel tanpa menutupi area formulir kerja.
+
+---
+
+## 🛠️ Arsitektur & Struktur Folder
 
 ```
 lectura-ai/
 ├── app/
 │   ├── api/
-│   │   ├── deconstruct/route.ts      # Endpoint modul dekonstruksi catatan
-│   │   ├── trap-predictor/route.ts   # Endpoint prediksi soal jebakan
-│   │   ├── cram-plan/route.ts        # Endpoint rencana belajar 24 jam
-│   │   ├── feynman/route.ts          # Endpoint tutor teknik Feynman
-│   │   └── status/route.ts           # Diagnostik real-time koneksi Gemini
+│   │   ├── deconstruct/route.ts      # Endpoint Dekonstruksi Catatan
+│   │   ├── trap-predictor/route.ts   # Endpoint Prediksi Soal Jebakan
+│   │   ├── cram-plan/route.ts        # Endpoint Rencana Belajar 24 Jam
+│   │   ├── feynman/route.ts          # Endpoint Metode Feynman
+│   │   └── status/route.ts           # Endpoint Diagnostik Live API & Fallback
 │   ├── components/
-│   │   ├── Header.tsx                # Navbar + live AI status + modal diagnostik
-│   │   ├── HeroSection.tsx           # Proposisi nilai + quick feature cards
-│   │   ├── OnboardingModal.tsx       # Panduan interaktif mobile-friendly
-│   │   ├── NoteDeconstructor.tsx     # Modul 01: Dekonstruksi materi
-│   │   ├── TrapPredictor.tsx         # Modul 02: Soal jebakan dosen
-│   │   ├── CramPlan.tsx              # Modul 03: Rencana 24 jam
+│   │   ├── LandingPage.tsx           # Halaman pembuka publik beranimasi GSAP
+│   │   ├── Header.tsx                # Bilah navigasi + status modal koneksi AI
+│   │   ├── HeroSection.tsx           # Segmented Control Bar switcher modul
+│   │   ├── NoteDeconstructor.tsx     # Modul 01: Dekonstruksi Catatan
+│   │   ├── TrapPredictor.tsx         # Modul 02: Prediksi Soal Jebakan
+│   │   ├── CramPlan.tsx              # Modul 03: Rencana Belajar Darurat
 │   │   ├── FeynmanExplainer.tsx      # Modul 04: Analogi Feynman
+│   │   ├── OnboardingModal.tsx       # Panduan interaktif 4-langkah pengguna baru
 │   │   └── Footer.tsx                # Footer minimalis & status sistem
-│   ├── globals.css                   # Custom subtle scrollbars & typography
-│   ├── layout.tsx                    # Plus Jakarta Sans & metadata SEO
+│   ├── globals.css                   # Custom scrollbar & styling dasar
+│   ├── layout.tsx                    # Google Fonts & konfigurasi SEO Metadata
 │   └── page.tsx                      # Main single-page interactive controller
 ├── lib/
 │   ├── gemini.ts                     # REST client v1beta + multi-model fallback
-│   ├── security.ts                   # Input sanitizer & Zod security wrapper
-│   └── types.ts                      # Strict TypeScript interfaces
-└── tailwind.config.js                # Custom palette, shadows, and radii
+│   ├── security.ts                   # Input sanitizer & Zod security validation
+│   └── types.ts                      # Definisi tipe data TypeScript
+├── public/
+│   ├── favicon.svg                   # Favicon SVG beresolusi tinggi (Academic Palette)
+│   ├── landing-page.png              # Cuplikan layar halaman depan
+│   └── usage-example.png             # Cuplikan layar antarmuka dashboard
+└── tailwind.config.js                # Definisi palet warna Academic & bayangan kustom
 ```
 
 * **Core Engine**: Google Generative Language REST API (`v1beta`).
-* **Active Model**: `gemini-3-flash-preview` dengan arsitektur auto-fallback ke `gemini-3.1-flash-lite` dan `gemini-3.5-flash` untuk menjamin *zero downtime* saat terjadi lonjakan antrean API publik.
-* **Security Layer**:
-  * Validasi skema ketat menggunakan **Zod**.
-  * Sanitasi string terhadap injeksi tag HTML/Script.
-  * In-memory Rate Limiting untuk perlindungan dari *spamming request*.
+* **Active Model**: `gemini-3-flash-preview` dengan sistem auto-fallback (`gemini-3.1-flash-lite`, `gemini-3.5-flash`) untuk menjamin kelancaran respons.
+* **Graceful Fallback Mode**: Aplikasi tetap dapat mendemokan hasil terkurasi berkualitas tinggi meskipun koneksi internet terputus atau kuota API belum terpasang.
 
 ---
 
-## 🚀 Panduan Instalasi Lokal
+## 🚀 Panduan Menjalankan Aplikasi
 
 ### 1. Klon Repositori
 ```bash
@@ -114,49 +116,36 @@ cd lectura-ai
 npm install
 ```
 
-### 3. Konfigurasi Environment Variables
-Salin file `.env.example` menjadi `.env.local`:
+### 3. Konfigurasi Kunci API (Opsional)
+Salin `.env.example` menjadi `.env.local`:
 ```bash
 cp .env.example .env.local
 ```
-
-Buka `.env.local` dan masukkan API Key dari Google AI Studio:
+Masukkan API Key dari [Google AI Studio](https://aistudio.google.com/):
 ```env
-GEMINI_API_KEY=masukkan_api_key_google_ai_studio_anda
-NEXT_PUBLIC_APP_URL=http://localhost:3000
+GEMINI_API_KEY=AIzaSyD-kode-api-key-anda-disini
 ```
-> *Dapatkan API Key gratis di [Google AI Studio](https://aistudio.google.com/app/apikey).*
+*(Jika kunci API tidak diisi, aplikasi akan otomatis beralih ke Mode Demo Cerdas).*
 
 ### 4. Jalankan Aplikasi
 ```bash
 npm run dev
 ```
-Buka peramban Anda di [http://localhost:3000](http://localhost:3000).
+Buka peramban di [http://localhost:3000](http://localhost:3000).
 
 ---
 
-## 🌐 Panduan Deploy Live Demo (Vercel)
-
-Aplikasi ini dioptimalkan 100% untuk platform **Vercel** (*zero-config deployment*):
-
-1. **Push ke GitHub**: Pastikan repositori Anda sudah ter-push ke akun `syubidin/lectura-ai`.
-2. **Kunjungi Vercel**: Buka [vercel.com](https://vercel.com) dan login menggunakan akun GitHub Anda.
-3. **Add New Project**: Pilih repositori **lectura-ai**.
-4. **Environment Variables**:
-   * Masukkan nama: `GEMINI_API_KEY`
-   * Masukkan value: API Key Google AI Studio Anda.
-5. **Deploy**: Klik tombol **Deploy**. Dalam ~1 menit, link live demo Anda aktif (contoh: `https://lectura-ai.vercel.app`) dan siap dibagikan kepada klien!
+## ⚡ 1-Click Launcher (Windows)
+Untuk pengguna awam di lingkungan Windows, cukup klik ganda file **`start-app.bat`**. Skrip otomatis mengecek instalasi Node.js, memasang pustaka dependensi jika belum ada, dan membuka browser secara otomatis.
 
 ---
 
-## 👤 Profil Pengembang
-
-* **Nama / Username**: **syubidin**
+## 👤 Pengembang
+* **Nama**: **syubidin**
 * **GitHub**: [@syubidin](https://github.com/syubidin)
 * **Email**: [syubyattala806@gmail.com](mailto:syubyattala806@gmail.com)
 
 ---
 
 ## 📄 Lisensi
-
-Proyek ini dirilis di bawah lisensi [MIT License](LICENSE). Bebas digunakan, dikembangkan, dan disesuaikan untuk kebutuhan akademik maupun komersial.
+Didistribusikan di bawah lisensi [MIT License](LICENSE).
