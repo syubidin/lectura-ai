@@ -1,6 +1,6 @@
 'use client';
 import React from 'react';
-import { BookOpen, Target, Clock, Lightbulb, ArrowRight } from 'lucide-react';
+import { BookOpen, Target, Clock, Lightbulb } from 'lucide-react';
 
 interface HeroProps {
   activeTab: string;
@@ -8,88 +8,80 @@ interface HeroProps {
 }
 
 export default function HeroSection({ activeTab, setActiveTab }: HeroProps) {
-  const features = [
+  const modules = [
     {
       id: 'deconstruct',
       title: 'Dekonstruksi Catatan',
-      desc: 'Pecah materi tebal jadi konsep kunci & modul 15-menit',
+      shortTitle: 'Ringkas Catatan',
       icon: BookOpen,
-      badge: 'Modul 01',
-      hoverBorder: 'hover:border-brand-300 hover:bg-brand-50/20',
+      badge: '01',
+      activeColor: 'text-chambray-700 bg-white border-chambray-300 shadow-sm',
     },
     {
       id: 'trap',
       title: 'Prediksi Soal Jebakan',
-      desc: 'Bongkar edge-cases & trik pembuat soal ujian',
+      shortTitle: 'Soal Jebakan',
       icon: Target,
-      badge: 'Modul 02',
-      hoverBorder: 'hover:border-rose-300 hover:bg-rose-50/20',
+      badge: '02',
+      activeColor: 'text-zest-600 bg-white border-zest-300 shadow-sm',
     },
     {
       id: 'cram',
       title: 'Rencana Belajar Darurat',
-      desc: 'Matriks waktu taktis Pareto 80/20 anti-burnout',
+      shortTitle: 'Jadwal 24-Jam',
       icon: Clock,
-      badge: 'Modul 03',
-      hoverBorder: 'hover:border-amber-300 hover:bg-amber-50/20',
+      badge: '03',
+      activeColor: 'text-ronchi-700 bg-white border-ronchi-300 shadow-sm',
     },
     {
       id: 'feynman',
       title: 'Metode Richard Feynman',
-      desc: 'Pahami teori abstrak lewat analogi dunia nyata',
+      shortTitle: 'Metode Feynman',
       icon: Lightbulb,
-      badge: 'Modul 04',
-      hoverBorder: 'hover:border-violet-300 hover:bg-violet-50/20',
+      badge: '04',
+      activeColor: 'text-chambray-800 bg-white border-pigeon-300 shadow-sm',
     },
   ];
 
   return (
-    <div className="mb-6 pt-1">
-      {/* Quick Feature Switcher Strip */}
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-2.5 sm:gap-3.5 max-w-7xl mx-auto">
-        {features.map((f) => {
-          const Icon = f.icon;
-          const isSelected = activeTab === f.id;
-          return (
-            <button
-              key={f.id}
-              onClick={() => setActiveTab(f.id)}
-              className={`p-3.5 sm:p-4 rounded-2xl border text-left transition-all duration-200 flex flex-col justify-between ${
-                isSelected
-                  ? 'bg-white border-brand-500 shadow-brand ring-2 ring-brand-500/10'
-                  : `bg-white border-slate-200/80 shadow-subtle ${f.hoverBorder}`
-              }`}
-            >
-              <div>
-                <div className="flex items-center justify-between mb-2.5">
-                  <div className={`w-7 h-7 sm:w-8 sm:h-8 rounded-xl flex items-center justify-center ${
-                    isSelected ? 'bg-brand-600 text-white' : 'bg-slate-100 text-slate-700'
-                  }`}>
-                    <Icon className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
-                  </div>
-                  <span className={`text-[10px] font-semibold px-2 py-0.5 rounded-full ${
-                    isSelected ? 'bg-brand-50 text-brand-700' : 'bg-slate-100 text-slate-500'
-                  }`}>
-                    {f.badge}
+    <div className="mb-5">
+      {/* Sleek Segmented Module Switcher */}
+      <div className="bg-slate-200/60 p-1.5 rounded-2xl border border-slate-200/90 shadow-subtle">
+        {/* Horizontal scroll container on mobile, flex grid on desktop */}
+        <div className="flex items-center gap-1.5 overflow-x-auto no-scrollbar sm:grid sm:grid-cols-4">
+          {modules.map((m) => {
+            const Icon = m.icon;
+            const isSelected = activeTab === m.id;
+            return (
+              <button
+                key={m.id}
+                onClick={() => setActiveTab(m.id)}
+                className={`flex items-center justify-center sm:justify-start gap-2 px-3 py-2 sm:px-3.5 sm:py-2.5 rounded-xl text-xs font-semibold transition-all duration-150 whitespace-nowrap shrink-0 sm:shrink ${
+                  isSelected
+                    ? `${m.activeColor} ring-1 ring-slate-900/5`
+                    : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100/80 border border-transparent'
+                }`}
+                title={m.title}
+              >
+                <div
+                  className={`w-6 h-6 rounded-lg flex items-center justify-center shrink-0 transition-all ${
+                    isSelected ? 'bg-chambray-600 text-white' : 'bg-slate-200/80 text-slate-500'
+                  }`}
+                >
+                  <Icon className="w-3.5 h-3.5" />
+                </div>
+                <div className="flex flex-col text-left">
+                  <span className="hidden sm:inline font-bold tracking-tight text-xs leading-none">
+                    {m.title}
+                  </span>
+                  <span className="sm:hidden font-bold tracking-tight text-xs leading-none">
+                    {m.shortTitle}
                   </span>
                 </div>
-                <h3 className="font-bold text-slate-900 text-xs sm:text-sm">
-                  {f.title}
-                </h3>
-                <p className="text-[11px] text-slate-500 mt-0.5 leading-snug line-clamp-2">
-                  {f.desc}
-                </p>
-              </div>
-
-              <div className="mt-2.5 pt-2 border-t border-slate-100 flex items-center justify-between text-[11px] font-medium">
-                <span className={isSelected ? 'text-brand-600 font-semibold' : 'text-slate-400'}>
-                  {isSelected ? 'Sedang Digunakan' : 'Pilih Modul'}
-                </span>
-                <ArrowRight className={`w-3 h-3 ${isSelected ? 'text-brand-600' : 'text-slate-300'}`} />
-              </div>
-            </button>
-          );
-        })}
+              </button>
+            );
+          })}
+        </div>
       </div>
     </div>
   );

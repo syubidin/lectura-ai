@@ -36,9 +36,9 @@ export default function OnboardingModal({ isOpen, onClose, onSelectFeature }: On
       subtitle: 'Platform asisten akademik & copilot persiapan ujian modern berbasis riset sains kognitif.',
       content: (
         <div className="space-y-4 py-2">
-          <div className="p-4 rounded-2xl bg-brand-50/70 border border-brand-100 flex items-start gap-3.5">
-            <div className="w-10 h-10 rounded-xl bg-brand-600 text-white flex items-center justify-center shrink-0 shadow-sm shadow-brand-200">
-              <Sparkles className="w-5 h-5" />
+          <div className="p-4 rounded-2xl bg-chambray-50 border border-chambray-100 flex items-start gap-3.5">
+            <div className="w-10 h-10 rounded-xl bg-chambray-600 text-white flex items-center justify-center shrink-0 shadow-sm shadow-chambray-200">
+              <Sparkles className="w-5 h-5 text-ronchi-300" />
             </div>
             <div>
               <h4 className="text-sm font-bold text-slate-900 mb-1">
@@ -52,7 +52,7 @@ export default function OnboardingModal({ isOpen, onClose, onSelectFeature }: On
 
           <div className="grid grid-cols-2 gap-2.5 text-left">
             <div className="p-3 rounded-xl bg-slate-50 border border-slate-200/70">
-              <span className="text-[10px] font-bold text-brand-600 uppercase block mb-1">
+              <span className="text-[10px] font-bold text-chambray-600 uppercase block mb-1">
                 Bertenaga AI Terkini
               </span>
               <p className="text-xs text-slate-700 font-medium">
@@ -83,28 +83,28 @@ export default function OnboardingModal({ isOpen, onClose, onSelectFeature }: On
               title: '01. Ringkas Catatan',
               desc: 'Pecah materi tebal jadi konsep kunci dan checklist 15-menit.',
               icon: BookOpen,
-              color: 'text-brand-600 bg-brand-50 border-brand-100'
+              color: 'text-chambray-700 bg-chambray-50 border-chambray-200'
             },
             {
               id: 'trap',
               title: '02. Prediksi Soal Jebakan',
               desc: 'Antisipasi trik kata & kondisi batas (edge cases) pembuat soal ujian.',
               icon: Target,
-              color: 'text-rose-600 bg-rose-50 border-rose-100'
+              color: 'text-zest-600 bg-zest-50 border-zest-200'
             },
             {
               id: 'cram',
               title: '03. Jadwal Belajar 24-Jam',
               desc: 'Alokasi jam Pareto 80/20 & manajemen energi kognitif anti-burnout.',
               icon: Clock,
-              color: 'text-amber-600 bg-amber-50 border-amber-100'
+              color: 'text-ronchi-700 bg-ronchi-50 border-ronchi-200'
             },
             {
               id: 'feynman',
               title: '04. Tutor Feynman',
               desc: 'Analogi dunia nyata intuitif untuk memahami teori yang rumit.',
               icon: Lightbulb,
-              color: 'text-violet-600 bg-violet-50 border-violet-100'
+              color: 'text-chambray-800 bg-pigeon-50 border-pigeon-300'
             },
           ].map((item) => {
             const Icon = item.icon;
@@ -140,7 +140,7 @@ export default function OnboardingModal({ isOpen, onClose, onSelectFeature }: On
       content: (
         <div className="space-y-3 py-2 text-left">
           <div className="p-3 rounded-xl bg-slate-50 border border-slate-200/80 flex items-start gap-3">
-            <span className="w-6 h-6 rounded-md bg-brand-600 text-white flex items-center justify-center text-xs font-bold shrink-0 mt-0.5">
+            <span className="w-6 h-6 rounded-md bg-chambray-600 text-white flex items-center justify-center text-xs font-bold shrink-0 mt-0.5">
               1
             </span>
             <div>
@@ -154,7 +154,7 @@ export default function OnboardingModal({ isOpen, onClose, onSelectFeature }: On
           </div>
 
           <div className="p-3 rounded-xl bg-slate-50 border border-slate-200/80 flex items-start gap-3">
-            <span className="w-6 h-6 rounded-md bg-brand-600 text-white flex items-center justify-center text-xs font-bold shrink-0 mt-0.5">
+            <span className="w-6 h-6 rounded-md bg-chambray-600 text-white flex items-center justify-center text-xs font-bold shrink-0 mt-0.5">
               2
             </span>
             <div>
@@ -168,7 +168,7 @@ export default function OnboardingModal({ isOpen, onClose, onSelectFeature }: On
           </div>
 
           <div className="p-3 rounded-xl bg-slate-50 border border-slate-200/80 flex items-start gap-3">
-            <span className="w-6 h-6 rounded-md bg-brand-600 text-white flex items-center justify-center text-xs font-bold shrink-0 mt-0.5">
+            <span className="w-6 h-6 rounded-md bg-chambray-600 text-white flex items-center justify-center text-xs font-bold shrink-0 mt-0.5">
               3
             </span>
             <div>
@@ -243,7 +243,7 @@ export default function OnboardingModal({ isOpen, onClose, onSelectFeature }: On
         {/* Header Bar */}
         <div className="px-5 sm:px-6 pt-5 pb-3 border-b border-slate-100 flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <span className="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full bg-brand-50 text-brand-700 border border-brand-100">
+            <span className="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full bg-chambray-50 text-chambray-700 border border-chambray-200">
               {current.badge}
             </span>
             <span className="text-xs text-slate-400 font-medium">
@@ -284,7 +284,7 @@ export default function OnboardingModal({ isOpen, onClose, onSelectFeature }: On
                 onClick={() => setCurrentStep(i)}
                 className={`h-1.5 rounded-full transition-all ${
                   i === currentStep
-                    ? 'w-6 bg-brand-600'
+                    ? 'w-6 bg-chambray-600'
                     : 'w-1.5 bg-slate-300 hover:bg-slate-400'
                 }`}
                 title={`Lompat ke langkah ${i + 1}`}
@@ -306,7 +306,7 @@ export default function OnboardingModal({ isOpen, onClose, onSelectFeature }: On
 
             <button
               onClick={handleNext}
-              className="px-4 py-2 rounded-xl text-xs font-semibold text-white bg-brand-600 hover:bg-brand-700 active:bg-brand-800 transition shadow-sm shadow-brand-200 flex items-center gap-1.5"
+              className="px-4 py-2 rounded-xl text-xs font-semibold text-white bg-chambray-600 hover:bg-chambray-700 active:bg-chambray-800 transition shadow-brand flex items-center gap-1.5"
             >
               <span>{currentStep === steps.length - 1 ? 'Mulai Sekarang' : 'Lanjut'}</span>
               <ArrowRight className="w-3.5 h-3.5" />

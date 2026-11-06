@@ -101,35 +101,32 @@ export default function Header({ activeTab, setActiveTab, onOpenOnboarding, onBa
   return (
     <>
       <header className="sticky top-0 z-40 bg-white/90 backdrop-blur-md border-b border-slate-200/80 transition-all">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-16 gap-4">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center justify-between h-14 sm:h-16 gap-3">
             
             {/* Brand Logo */}
             <div 
               onClick={onBackToLanding}
-              className={`flex items-center gap-3 ${onBackToLanding ? 'cursor-pointer group' : ''}`}
+              className={`flex items-center gap-2.5 ${onBackToLanding ? 'cursor-pointer group' : ''}`}
               title={onBackToLanding ? 'Kembali ke Beranda Utama' : undefined}
             >
-              <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-brand-700 via-brand-600 to-violet-500 flex items-center justify-center text-white shadow-sm shadow-brand-200 group-hover:scale-105 transition">
-                <BookOpen className="w-5 h-5" />
+              <div className="w-8 h-8 rounded-lg bg-gradient-to-tr from-chambray-700 via-chambray-600 to-bermuda-500 flex items-center justify-center text-white shadow-sm shadow-chambray-200 group-hover:scale-105 transition">
+                <BookOpen className="w-4 h-4" />
               </div>
               <div className="flex flex-col">
-                <div className="flex items-center gap-2">
-                  <span className="font-bold text-base sm:text-lg tracking-tight text-slate-900 group-hover:text-brand-600 transition">
-                    Lectura<span className="text-brand-600 font-extrabold">AI</span>
+                <div className="flex items-center gap-1.5">
+                  <span className="font-bold text-sm sm:text-base tracking-tight text-slate-900 group-hover:text-chambray-600 transition">
+                    Lectura<span className="text-chambray-600 font-extrabold">AI</span>
                   </span>
-                  <span className="text-[10px] font-semibold px-1.5 py-0.5 rounded-full bg-slate-100 text-slate-600 border border-slate-200/60">
+                  <span className="text-[9px] font-semibold px-1.5 py-0.2 rounded-full bg-slate-100 text-chambray-800 border border-slate-200/80">
                     Academic
                   </span>
                 </div>
-                <span className="hidden sm:inline text-[11px] text-slate-500 font-medium">
-                  Copilot Belajar & Persiapan Ujian
-                </span>
               </div>
             </div>
 
-            {/* Desktop Navigation Tabs - Icon Only */}
-            <nav className="hidden md:flex items-center p-1 bg-slate-100/80 rounded-xl border border-slate-200/60 gap-0.5">
+            {/* Desktop Navigation Tabs - Compact Icon Only */}
+            <nav className="hidden md:flex items-center p-1 bg-slate-100/90 rounded-xl border border-slate-200/70 gap-0.5">
               {navItems.map((item) => {
                 const Icon = item.icon;
                 const isActive = activeTab === item.id;
@@ -137,15 +134,15 @@ export default function Header({ activeTab, setActiveTab, onOpenOnboarding, onBa
                   <button
                     key={item.id}
                     onClick={() => setActiveTab(item.id)}
-                    className={`p-2 rounded-lg transition-all duration-150 relative group ${
+                    className={`p-1.5 sm:p-2 rounded-lg transition-all duration-150 relative group ${
                       isActive
-                        ? 'bg-white text-brand-700 shadow-sm shadow-slate-200 border border-slate-200/60'
+                        ? 'bg-white text-chambray-700 shadow-sm border border-slate-200/80'
                         : 'text-slate-500 hover:text-slate-900 hover:bg-slate-200/50'
                     }`}
                     title={item.label}
                     aria-label={item.label}
                   >
-                    <Icon className={`w-4 h-4 ${isActive ? 'text-brand-600' : 'text-slate-500'}`} />
+                    <Icon className={`w-4 h-4 ${isActive ? 'text-chambray-600' : 'text-slate-500'}`} />
                     
                     {/* Tooltip on hover */}
                     <span className="pointer-events-none absolute -bottom-8 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-md bg-slate-900 px-2 py-0.5 text-[10px] font-medium text-white opacity-0 shadow-sm transition-opacity group-hover:opacity-100 z-50">
@@ -162,10 +159,10 @@ export default function Header({ activeTab, setActiveTab, onOpenOnboarding, onBa
               {onOpenOnboarding && (
                 <button
                   onClick={onOpenOnboarding}
-                  className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-medium border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 transition shadow-xs"
+                  className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-semibold border border-slate-200/90 bg-white hover:bg-slate-50 text-slate-700 transition shadow-xs"
                   title="Buka panduan penggunaan aplikasi"
                 >
-                  <HelpCircle className="w-3.5 h-3.5 text-brand-600" />
+                  <HelpCircle className="w-3.5 h-3.5 text-chambray-600" />
                   <span>Panduan</span>
                 </button>
               )}
@@ -173,12 +170,12 @@ export default function Header({ activeTab, setActiveTab, onOpenOnboarding, onBa
               {/* Status AI Modal Pill */}
               <button
                 onClick={() => setShowStatusModal(true)}
-                className={`flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl text-xs font-medium border transition-all shadow-xs ${
+                className={`flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl text-xs font-semibold border transition-all shadow-xs ${
                   status.loading
                     ? 'bg-slate-50 border-slate-200 text-slate-500'
                     : status.connected
                     ? 'bg-emerald-50 border-emerald-200 text-emerald-800 hover:bg-emerald-100/70'
-                    : 'bg-amber-50 border-amber-200 text-amber-800 hover:bg-amber-100/70'
+                    : 'bg-ronchi-50 border-ronchi-200 text-ronchi-800 hover:bg-ronchi-100/70'
                 }`}
                 title="Status koneksi AI"
               >
@@ -192,7 +189,7 @@ export default function Header({ activeTab, setActiveTab, onOpenOnboarding, onBa
                         ? 'bg-slate-400'
                         : status.connected
                         ? 'bg-emerald-500'
-                        : 'bg-amber-500'
+                        : 'bg-ronchi-500'
                     }`}
                   ></span>
                 </span>
@@ -220,7 +217,7 @@ export default function Header({ activeTab, setActiveTab, onOpenOnboarding, onBa
 
           {/* Mobile Drawer / Hamburger Dropdown */}
           {mobileMenuOpen && (
-            <div className="md:hidden py-3 px-2 border-t border-slate-200/80 bg-white/95 backdrop-blur-md rounded-b-2xl shadow-lg space-y-1 animate-in slide-in-from-top-2 duration-150">
+            <div className="md:hidden py-3 px-2 border-t border-slate-200/80 bg-white/95 backdrop-blur-md rounded-b-2xl shadow-elevated space-y-1 animate-in slide-in-from-top-2 duration-150">
               <p className="text-[10px] font-bold uppercase tracking-wider text-slate-400 px-3 py-1">
                 Pilih Modul Belajar
               </p>
@@ -237,19 +234,19 @@ export default function Header({ activeTab, setActiveTab, onOpenOnboarding, onBa
                     }}
                     className={`w-full flex items-center justify-between px-3 py-2.5 rounded-xl text-xs font-semibold transition ${
                       isActive
-                        ? 'bg-brand-50 text-brand-700 border border-brand-200/60'
+                        ? 'bg-chambray-50 text-chambray-700 border border-chambray-200/70'
                         : 'text-slate-700 hover:bg-slate-100'
                     }`}
                   >
                     <div className="flex items-center gap-2.5">
                       <div className={`w-7 h-7 rounded-lg flex items-center justify-center ${
-                        isActive ? 'bg-brand-600 text-white' : 'bg-slate-100 text-slate-600'
+                        isActive ? 'bg-chambray-600 text-white' : 'bg-slate-100 text-slate-600'
                       }`}>
                         <Icon className="w-4 h-4" />
                       </div>
                       <span>{item.label}</span>
                     </div>
-                    {isActive && <span className="text-[10px] bg-brand-600 text-white px-2 py-0.5 rounded-full font-medium">Aktif</span>}
+                    {isActive && <span className="text-[10px] bg-chambray-600 text-white px-2 py-0.5 rounded-full font-medium">Aktif</span>}
                   </button>
                 );
               })}
@@ -263,7 +260,7 @@ export default function Header({ activeTab, setActiveTab, onOpenOnboarding, onBa
                     }}
                     className="w-full flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-medium text-slate-700 hover:bg-slate-100 transition"
                   >
-                    <HelpCircle className="w-4 h-4 text-brand-600" />
+                    <HelpCircle className="w-4 h-4 text-chambray-600" />
                     <span>Panduan Penggunaan</span>
                   </button>
                 )}
@@ -274,7 +271,7 @@ export default function Header({ activeTab, setActiveTab, onOpenOnboarding, onBa
                       onBackToLanding();
                       setMobileMenuOpen(false);
                     }}
-                    className="w-full flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-medium text-brand-600 hover:bg-brand-50 transition"
+                    className="w-full flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-medium text-chambray-600 hover:bg-chambray-50 transition"
                   >
                     <Home className="w-4 h-4" />
                     <span>Kembali ke Beranda Utama</span>
@@ -299,7 +296,7 @@ export default function Header({ activeTab, setActiveTab, onOpenOnboarding, onBa
             </button>
 
             <div className="flex items-center gap-3 mb-4">
-              <div className={`p-2.5 rounded-xl ${status.connected ? 'bg-emerald-50 text-emerald-600' : 'bg-amber-50 text-amber-600'}`}>
+              <div className={`p-2.5 rounded-xl ${status.connected ? 'bg-emerald-50 text-emerald-600' : 'bg-ronchi-50 text-ronchi-700'}`}>
                 {status.connected ? <CheckCircle2 className="w-5 h-5" /> : <AlertCircle className="w-5 h-5" />}
               </div>
               <div>
@@ -318,14 +315,14 @@ export default function Header({ activeTab, setActiveTab, onOpenOnboarding, onBa
                   <Activity className="w-3.5 h-3.5 text-slate-400" />
                   Status Koneksi:
                 </span>
-                <span className={`font-semibold ${status.connected ? 'text-emerald-700' : 'text-amber-700'}`}>
+                <span className={`font-semibold ${status.connected ? 'text-emerald-700' : 'text-ronchi-800'}`}>
                   {status.connected ? 'Terhubung (Online)' : 'Demo Mode (Offline)'}
                 </span>
               </div>
 
               <div className="flex justify-between items-center py-1 border-b border-slate-200/50">
                 <span className="text-slate-500 flex items-center gap-1.5">
-                  <Sparkles className="w-3.5 h-3.5 text-brand-500" />
+                  <Sparkles className="w-3.5 h-3.5 text-chambray-500" />
                   Model Aktif:
                 </span>
                 <span className="font-mono font-medium text-slate-800 bg-white px-2 py-0.5 rounded border border-slate-200">
@@ -351,7 +348,7 @@ export default function Header({ activeTab, setActiveTab, onOpenOnboarding, onBa
               </div>
             </div>
 
-            <div className="mt-4 p-3 rounded-lg bg-brand-50/60 border border-brand-100 text-[11px] text-brand-900 leading-relaxed">
+            <div className="mt-4 p-3 rounded-lg bg-chambray-50 border border-chambray-100 text-[11px] text-chambray-900 leading-relaxed">
               <strong>Info:</strong> API Key terbaca dari file <code>.env.local</code>. Ketika terhubung, setiap permintaan akan diproses langsung oleh model <strong>Gemini 3 Flash</strong> dengan fitur auto-fallback ke model cadangan jika terjadi lonjakan beban.
             </div>
 
@@ -359,7 +356,7 @@ export default function Header({ activeTab, setActiveTab, onOpenOnboarding, onBa
               <button
                 onClick={checkStatus}
                 disabled={status.loading}
-                className="flex-1 flex items-center justify-center gap-2 px-4 py-2 bg-brand-600 hover:bg-brand-700 text-white rounded-xl text-xs font-semibold transition disabled:opacity-50"
+                className="flex-1 flex items-center justify-center gap-2 px-4 py-2 bg-chambray-600 hover:bg-chambray-700 text-white rounded-xl text-xs font-semibold transition disabled:opacity-50 shadow-brand"
               >
                 <RefreshCw className={`w-3.5 h-3.5 ${status.loading ? 'animate-spin' : ''}`} />
                 {status.loading ? 'Memeriksa...' : 'Cek Ulang Koneksi'}

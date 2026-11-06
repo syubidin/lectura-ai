@@ -11,8 +11,8 @@ import {
   ChevronRight,
   Zap,
   Brain,
-  TrendingUp,
-  Users,
+  CheckCircle2,
+  Compass,
 } from 'lucide-react';
 
 interface LandingPageProps {
@@ -21,246 +21,268 @@ interface LandingPageProps {
 }
 
 export default function LandingPage({ onEnterApp, onOpenFeature }: LandingPageProps) {
-  const heroRef      = useRef<HTMLDivElement>(null);
-  const badgeRef     = useRef<HTMLDivElement>(null);
-  const h1Ref        = useRef<HTMLHeadingElement>(null);
-  const subtitleRef  = useRef<HTMLParagraphElement>(null);
-  const ctaRef       = useRef<HTMLDivElement>(null);
-  const metricsRef   = useRef<HTMLDivElement>(null);
-  const featuresRef  = useRef<HTMLDivElement>(null);
-  const howRef       = useRef<HTMLDivElement>(null);
-  const ctaBannerRef = useRef<HTMLDivElement>(null);
+  const heroRef     = useRef<HTMLDivElement>(null);
+  const badgeRef    = useRef<HTMLDivElement>(null);
+  const h1Ref       = useRef<HTMLHeadingElement>(null);
+  const subtitleRef = useRef<HTMLParagraphElement>(null);
+  const ctaRef      = useRef<HTMLDivElement>(null);
+  const metricsRef  = useRef<HTMLDivElement>(null);
 
-  /* ─── GSAP entrance animations ───────────────────────────── */
+  /* ─── Lightweight GSAP entrance animations (bulletproof) ──── */
   useEffect(() => {
-    let ctx: { revert: () => void } | null = null;
+    let isMounted = true;
 
-    const run = async () => {
-      const { gsap } = await import('gsap');
-      const { ScrollTrigger } = await import('gsap/ScrollTrigger');
-      gsap.registerPlugin(ScrollTrigger);
+    const runAnimations = async () => {
+      try {
+        const { gsap } = await import('gsap');
+        if (!isMounted) return;
 
-      // Respect reduced-motion preference
-      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      if (prefersReducedMotion) return;
+        // Respect user's motion preference
+        const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        if (prefersReducedMotion) return;
 
-      ctx = gsap.context(() => {
-        // Hero entrance — staggered from bottom
-        const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
-        tl.from(badgeRef.current,    { opacity: 0, y: 24, duration: 0.6 })
-          .from(h1Ref.current,       { opacity: 0, y: 32, duration: 0.75 }, '-=0.3')
-          .from(subtitleRef.current, { opacity: 0, y: 24, duration: 0.6  }, '-=0.4')
-          .from(ctaRef.current,      { opacity: 0, y: 20, duration: 0.5  }, '-=0.35')
-          .from(metricsRef.current ? metricsRef.current.children : [], {
-            opacity: 0, y: 20, duration: 0.5, stagger: 0.08
-          }, '-=0.3');
-
-        // Features grid — scroll-triggered stagger
-        if (featuresRef.current) {
-          gsap.from(featuresRef.current.children, {
-            opacity: 0, y: 36, duration: 0.6, stagger: 0.1,
-            scrollTrigger: {
-              trigger: featuresRef.current,
-              start: 'top 82%',
-            },
-          });
+        // Smooth staggered entrance for Hero elements only, safely with clearProps
+        const tl = gsap.timeline({ defaults: { ease: 'power2.out' } });
+        
+        if (badgeRef.current) {
+          tl.fromTo(badgeRef.current, { opacity: 0, y: 15 }, { opacity: 1, y: 0, duration: 0.5, clearProps: 'all' });
         }
-
-        // "How it works" steps
-        if (howRef.current) {
-          gsap.from(howRef.current.children, {
-            opacity: 0, x: -24, duration: 0.55, stagger: 0.1,
-            scrollTrigger: {
-              trigger: howRef.current,
-              start: 'top 80%',
-            },
-          });
+        if (h1Ref.current) {
+          tl.fromTo(h1Ref.current, { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.6, clearProps: 'all' }, '-=0.3');
         }
-
-        // CTA banner
-        if (ctaBannerRef.current) {
-          gsap.from(ctaBannerRef.current, {
-            opacity: 0, scale: 0.97, duration: 0.65,
-            scrollTrigger: {
-              trigger: ctaBannerRef.current,
-              start: 'top 85%',
-            },
-          });
+        if (subtitleRef.current) {
+          tl.fromTo(subtitleRef.current, { opacity: 0, y: 15 }, { opacity: 1, y: 0, duration: 0.5, clearProps: 'all' }, '-=0.35');
         }
-      });
+        if (ctaRef.current) {
+          tl.fromTo(ctaRef.current, { opacity: 0, y: 15 }, { opacity: 1, y: 0, duration: 0.45, clearProps: 'all' }, '-=0.3');
+        }
+        if (metricsRef.current) {
+          tl.fromTo(
+            Array.from(metricsRef.current.children),
+            { opacity: 0, y: 15 },
+            { opacity: 1, y: 0, duration: 0.4, stagger: 0.08, clearProps: 'all' },
+            '-=0.25'
+          );
+        }
+      } catch (err) {
+        console.error('GSAP animation error:', err);
+      }
     };
 
-    run();
-    return () => { ctx?.revert(); };
+    runAnimations();
+
+    return () => {
+      isMounted = false;
+    };
   }, []);
 
-  /* ─── Data ────────────────────────────────────────────────── */
+  /* ─── 4 Core Academic Features ────────────────────────────── */
   const features = [
     {
       id: 'deconstruct',
       icon: BookOpen,
-      accent: 'text-brand-600 bg-brand-50 border-brand-100',
-      hoverBorder: 'hover:border-brand-300',
+      iconBg: 'bg-chambray-50 text-chambray-700 border-chambray-200',
+      tagBg: 'bg-chambray-50 text-chambray-700',
+      borderHover: 'hover:border-chambray-400 hover:shadow-elevated',
+      badge: 'Modul 01',
       title: 'Dekonstruksi Catatan',
-      desc: 'Memecah catatan kuliah padat menjadi konsep inti dan modul belajar 15-menit yang mudah dicerna otak (Chunking Theory).',
-      tag: 'Cognitive Load',
+      desc: 'Memecah catatan kuliah tebal menjadi konsep inti berbobot dan modul belajar 15-menit yang mudah dicerna otak (Chunking Theory).',
+      tag: 'Chunking Theory',
     },
     {
       id: 'trap',
       icon: Target,
-      accent: 'text-rose-600 bg-rose-50 border-rose-100',
-      hoverBorder: 'hover:border-rose-300',
+      iconBg: 'bg-zest-50 text-zest-600 border-zest-200',
+      tagBg: 'bg-zest-50 text-zest-700',
+      borderHover: 'hover:border-zest-400 hover:shadow-elevated',
+      badge: 'Modul 02',
       title: 'Prediksi Soal Jebakan',
-      desc: 'Simulasi pola pikir dosen untuk mengungkap pertanyaan mengecoh (edge cases) dan kesalahan umum mahasiswa.',
-      tag: 'Exam Strategy',
+      desc: 'Simulasi pola pikir pembuat soal ujian untuk mengungkap pertanyaan mengecoh, jebakan kata, dan edge cases rawan keliru.',
+      tag: 'Examiner Mindset',
     },
     {
       id: 'cram',
       icon: Clock,
-      accent: 'text-amber-600 bg-amber-50 border-amber-100',
-      hoverBorder: 'hover:border-amber-300',
+      iconBg: 'bg-ronchi-50 text-ronchi-700 border-ronchi-200',
+      tagBg: 'bg-ronchi-50 text-ronchi-800',
+      borderHover: 'hover:border-ronchi-400 hover:shadow-elevated',
+      badge: 'Modul 03',
       title: 'Rencana Belajar Darurat',
-      desc: 'Alokasi waktu terstruktur berbasis Prinsip Pareto 80/20 dan manajemen energi kognitif sebelum ujian.',
+      desc: 'Alokasi waktu SKS taktis berbasis Prinsip Pareto 80/20 dan manajemen energi kognitif anti-burnout sebelum ujian.',
       tag: 'Pareto 80/20',
     },
     {
       id: 'feynman',
       icon: Lightbulb,
-      accent: 'text-violet-600 bg-violet-50 border-violet-100',
-      hoverBorder: 'hover:border-violet-300',
+      iconBg: 'bg-pigeon-50 text-chambray-800 border-pigeon-300',
+      tagBg: 'bg-pigeon-50 text-chambray-800',
+      borderHover: 'hover:border-pigeon-400 hover:shadow-elevated',
+      badge: 'Modul 04',
       title: 'Metode Richard Feynman',
-      desc: 'Menyederhanakan konsep paling rumit menggunakan analogi dunia nyata yang intuitif tanpa jargon berbelit.',
-      tag: 'Deep Learning',
+      desc: 'Menyederhanakan konsep paling rumit menggunakan analogi dunia nyata yang intuitif tanpa jargon akademis berbelit.',
+      tag: 'Mental Model',
     },
   ];
 
+  /* ─── Metrics ─────────────────────────────────────────────── */
   const metrics = [
-    { val: 'Google Gemini', label: 'AI Engine Utama',      sub: 'Latensi ~1–2 detik' },
-    { val: '4 Modul',       label: 'Instrumen Akademik',   sub: 'Active Learning' },
-    { val: 'Offline Mode',  label: 'Demo Tahan Gangguan',  sub: 'Tanpa Internet Pun Oke' },
-    { val: 'Responsif',     label: 'Multi-Device',         sub: 'HP, Tablet & Laptop' },
+    { val: 'Google Gemini', label: 'AI Engine Utama',     sub: 'Latensi cepat ~1-2 detik' },
+    { val: '4 Modul',       label: 'Instrumen Akademik',  sub: 'Active Recall & Chunking' },
+    { val: 'Mode Demo',     label: 'Graceful Fallback',   sub: 'Tetap jalan tanpa kuota' },
+    { val: '100% Responsif',label: 'Desain Teroptimasi',  sub: 'Lancar di HP & Laptop' },
   ];
 
+  /* ─── How It Works ────────────────────────────────────────── */
   const howItWorks = [
-    { step: '01', icon: BookOpen,    title: 'Tempel Catatan Kuliah',   desc: 'Paste ringkasan, PPT, atau catatan tangan yang sudah di-ketik ke kolom input.' },
-    { step: '02', icon: Brain,       title: 'Pilih Modul yang Sesuai', desc: 'Pilih salah satu dari 4 modul AI berdasarkan kebutuhan studimu saat ini.' },
-    { step: '03', icon: Sparkles,    title: 'Gemini Memproses',        desc: 'Model AI menganalisis materi dan menghasilkan output terstruktur dalam hitungan detik.' },
-    { step: '04', icon: TrendingUp,  title: 'Pelajari & Ekspor',       desc: 'Salin hasilnya, ekspor ke Markdown, atau langsung pelajari di layar.' },
+    {
+      step: '01',
+      title: 'Masukkan Catatan Kuliah',
+      desc: 'Tempelkan rangkuman, slide, materi PDF, atau gunakan tombol contoh instan yang tersedia.',
+      icon: BookOpen,
+      color: 'bg-chambray-600 text-white',
+    },
+    {
+      step: '02',
+      title: 'Pilih Modul Akademik',
+      desc: 'Pilih kebutuhan studimu: ringkas catatan, bedah jebakan ujian, jadwal darurat, atau analogi Feynman.',
+      icon: Compass,
+      color: 'bg-bermuda-500 text-white',
+    },
+    {
+      step: '03',
+      title: 'Gemini AI Memproses',
+      desc: 'Model AI mengekstrak konsep kunci dan menyusun instruksi terstruktur dalam hitungan detik.',
+      icon: Brain,
+      color: 'bg-ronchi-500 text-chambray-950',
+    },
+    {
+      step: '04',
+      title: 'Pelajari & Ekspor Markdown',
+      desc: 'Gunakan checklist 15-menit, salin teks ke Notion/Obsidian, atau ekspor file .md langsung.',
+      icon: CheckCircle2,
+      color: 'bg-zest-500 text-white',
+    },
   ];
 
-  /* ─── JSX ─────────────────────────────────────────────────── */
   return (
-    <div className="min-h-screen bg-white text-slate-900 flex flex-col font-sans selection:bg-brand-600 selection:text-white">
+    <div className="min-h-screen bg-slate-50/70 text-slate-900 flex flex-col font-sans selection:bg-chambray-600 selection:text-white">
 
-      {/* ── Navbar ── */}
-      <header className="sticky top-0 z-30 bg-white/80 backdrop-blur-md border-b border-slate-100">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-          {/* Logo */}
+      {/* ── Top Navigation Bar ── */}
+      <header className="sticky top-0 z-30 bg-white/90 backdrop-blur-md border-b border-slate-200/80">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+          
+          {/* Brand Logo */}
           <div className="flex items-center gap-3">
-            <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-brand-700 via-brand-600 to-violet-500 flex items-center justify-center text-white shadow-sm shadow-brand-200">
+            <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-chambray-700 via-chambray-600 to-bermuda-500 flex items-center justify-center text-white shadow-sm shadow-chambray-200">
               <BookOpen className="w-5 h-5" />
             </div>
-            <span className="font-bold text-base sm:text-lg tracking-tight text-slate-900">
-              Lectura<span className="text-brand-600 font-extrabold">AI</span>
-            </span>
+            <div className="flex flex-col">
+              <span className="font-bold text-base sm:text-lg tracking-tight text-slate-900">
+                Lectura<span className="text-chambray-600 font-extrabold">AI</span>
+              </span>
+              <span className="hidden sm:inline text-[10px] text-bermuda-600 font-medium -mt-0.5">
+                Academic Copilot & Study Accelerator
+              </span>
+            </div>
           </div>
 
-          {/* Nav Right */}
-          <div className="flex items-center gap-3">
+          {/* Nav Links & CTA */}
+          <div className="flex items-center gap-4">
             <a
               href="#fitur"
-              className="hidden md:inline text-sm text-slate-600 hover:text-brand-600 font-medium transition"
+              className="hidden sm:inline text-xs font-semibold text-slate-600 hover:text-chambray-600 transition"
             >
               Fitur
             </a>
             <a
               href="#cara-kerja"
-              className="hidden md:inline text-sm text-slate-600 hover:text-brand-600 font-medium transition"
+              className="hidden sm:inline text-xs font-semibold text-slate-600 hover:text-chambray-600 transition"
             >
               Cara Kerja
             </a>
             <button
               onClick={onEnterApp}
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-brand-600 hover:bg-brand-700 active:bg-brand-800 text-white text-sm font-semibold shadow-sm shadow-brand-200 transition"
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-chambray-600 hover:bg-chambray-700 active:bg-chambray-800 text-white text-xs sm:text-sm font-semibold shadow-brand transition-all hover:scale-[1.02]"
             >
               <span>Buka Aplikasi</span>
               <ArrowRight className="w-4 h-4" />
             </button>
           </div>
+
         </div>
       </header>
 
-      {/* ── Hero ── */}
-      <section ref={heroRef} className="relative overflow-hidden pt-16 pb-20 sm:pt-24 sm:pb-28 border-b border-slate-100">
-        {/* Subtle background grid */}
+      {/* ── Hero Section ── */}
+      <section ref={heroRef} className="relative overflow-hidden pt-12 pb-16 sm:pt-20 sm:pb-24 border-b border-slate-200/70 bg-gradient-to-b from-white via-slate-50/50 to-slate-100/40">
+        
+        {/* Subtle geometric background accents */}
         <div
           aria-hidden
           className="pointer-events-none absolute inset-0 opacity-[0.03]"
           style={{
-            backgroundImage: 'linear-gradient(to right, #7c3aed 1px, transparent 1px), linear-gradient(to bottom, #7c3aed 1px, transparent 1px)',
-            backgroundSize: '48px 48px',
+            backgroundImage: 'radial-gradient(#38598a 1px, transparent 1px)',
+            backgroundSize: '24px 24px',
           }}
         />
-        {/* Purple glow blob */}
         <div
           aria-hidden
-          className="pointer-events-none absolute -top-40 left-1/2 -translate-x-1/2 w-[640px] h-[640px] rounded-full blur-3xl opacity-[0.07]"
-          style={{ background: 'radial-gradient(circle, #7c3aed 0%, transparent 70%)' }}
+          className="pointer-events-none absolute -top-32 left-1/2 -translate-x-1/2 w-[580px] h-[340px] rounded-full blur-3xl opacity-20"
+          style={{ background: 'radial-gradient(circle, #a7c4d7 0%, #38598a 70%, transparent 100%)' }}
         />
 
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
 
-          {/* Badge */}
-          <div ref={badgeRef} className="flex justify-center mb-6">
-            <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-brand-50 border border-brand-200/70 text-brand-700 text-xs font-semibold">
-              <Sparkles className="w-3.5 h-3.5" />
-              Didukung Google Gemini AI
+          {/* Academic Badge */}
+          <div ref={badgeRef} className="flex justify-center mb-5">
+            <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-chambray-50 border border-chambray-200/80 text-chambray-700 text-xs font-semibold shadow-xs">
+              <Sparkles className="w-3.5 h-3.5 text-ronchi-500" />
+              <span>Didukung Google Gemini AI Engine</span>
             </span>
           </div>
 
           {/* Headline */}
-          <div className="max-w-3xl mx-auto text-center">
-            <h1
-              ref={h1Ref}
-              className="text-3xl sm:text-5xl lg:text-6xl font-bold text-slate-900 tracking-tight leading-[1.12]"
-            >
-              Belajar Lebih Cerdas,{' '}
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-600 via-violet-500 to-brand-700">
-                Bukan Lebih Keras
-              </span>
-            </h1>
+          <h1
+            ref={h1Ref}
+            className="text-3xl sm:text-5xl lg:text-5xl font-bold text-slate-900 tracking-tight leading-[1.18] max-w-3xl mx-auto"
+          >
+            Belajar Lebih Efisien,{' '}
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-chambray-700 via-chambray-600 to-zest-500">
+              Pahami Konsep Lebih Cepat
+            </span>
+          </h1>
 
-            <p
-              ref={subtitleRef}
-              className="mt-5 text-sm sm:text-base text-slate-500 max-w-2xl mx-auto leading-relaxed"
-            >
-              Lectura AI adalah copilot akademik bertenaga kecerdasan buatan yang membantu mahasiswa memahami materi lebih cepat, mengantisipasi soal ujian, dan merancang strategi belajar yang efisien — semua dalam satu platform.
-            </p>
+          {/* Subtitle */}
+          <p
+            ref={subtitleRef}
+            className="mt-4 text-xs sm:text-sm md:text-base text-slate-600 max-w-2xl mx-auto leading-relaxed"
+          >
+            Platform asisten akademik bertenaga AI untuk mereduksi beban kognitif mahasiswa. Memecah catatan rumit menjadi modul 15-menit, memprediksi jebakan soal ujian, dan mengatur waktu belajar darurat berbasis sains kognitif.
+          </p>
 
-            <div ref={ctaRef} className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3">
-              <button
-                onClick={onEnterApp}
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-7 py-3.5 rounded-2xl bg-brand-600 hover:bg-brand-700 active:bg-brand-800 text-white font-semibold text-sm shadow-brand transition"
-              >
-                <Zap className="w-4 h-4" />
-                <span>Mulai Gratis Sekarang</span>
-                <ArrowRight className="w-4 h-4" />
-              </button>
-              <a
-                href="#fitur"
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-2xl bg-white hover:bg-slate-50 border border-slate-200 text-slate-700 font-semibold text-sm shadow-subtle transition"
-              >
-                Lihat Semua Fitur
-              </a>
-            </div>
+          {/* CTA Buttons */}
+          <div ref={ctaRef} className="mt-7 flex flex-col sm:flex-row items-center justify-center gap-3">
+            <button
+              onClick={onEnterApp}
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-6 py-3 rounded-xl bg-chambray-600 hover:bg-chambray-700 active:bg-chambray-800 text-white font-semibold text-xs sm:text-sm shadow-brand hover:shadow-elevated transition-all"
+            >
+              <Zap className="w-4 h-4 text-ronchi-300" />
+              <span>Mulai Belajar Sekarang</span>
+              <ArrowRight className="w-4 h-4" />
+            </button>
+            <a
+              href="#fitur"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-white hover:bg-slate-50 border border-slate-200/90 text-slate-700 font-semibold text-xs sm:text-sm shadow-subtle transition"
+            >
+              <span>Pelajari 4 Modul Fitur</span>
+            </a>
           </div>
 
-          {/* Metrics strip */}
-          <div ref={metricsRef} className="mt-14 max-w-4xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4">
+          {/* Metrics Strip */}
+          <div ref={metricsRef} className="mt-12 max-w-4xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4">
             {metrics.map((m, i) => (
-              <div key={i} className="p-4 rounded-2xl bg-white border border-slate-200/80 shadow-subtle text-center">
-                <p className="text-sm sm:text-base font-bold text-slate-900 tracking-tight">{m.val}</p>
-                <p className="text-xs font-semibold text-slate-700 mt-0.5">{m.label}</p>
+              <div key={i} className="p-3.5 sm:p-4 rounded-xl bg-white/90 backdrop-blur-xs border border-slate-200/80 shadow-subtle text-center">
+                <p className="text-xs sm:text-sm font-bold text-slate-900 tracking-tight">{m.val}</p>
+                <p className="text-[11px] font-semibold text-chambray-700 mt-0.5">{m.label}</p>
                 <p className="text-[10px] text-slate-400 mt-0.5">{m.sub}</p>
               </div>
             ))}
@@ -269,23 +291,25 @@ export default function LandingPage({ onEnterApp, onOpenFeature }: LandingPagePr
         </div>
       </section>
 
-      {/* ── Features ── */}
-      <section id="fitur" className="py-16 sm:py-20 bg-slate-50/60 border-b border-slate-100">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      {/* ── 4 Pillars Feature Section ── */}
+      <section id="fitur" className="py-14 sm:py-20 bg-white border-b border-slate-200/70">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
 
-          <div className="text-center max-w-2xl mx-auto mb-12">
-            <span className="text-xs font-bold uppercase tracking-wider text-brand-600 bg-brand-50 px-3 py-1 rounded-full border border-brand-100">
-              Instrumen Pembelajaran
+          {/* Section Header */}
+          <div className="text-center max-w-2xl mx-auto mb-10 sm:mb-14">
+            <span className="text-[11px] font-bold uppercase tracking-wider text-chambray-700 bg-chambray-50 px-3 py-1 rounded-full border border-chambray-200/70">
+              Instrumen Belajar
             </span>
             <h2 className="text-2xl sm:text-3xl font-bold text-slate-900 tracking-tight mt-3">
-              4 Pilar Fitur Lectura AI
+              4 Modul Utama Lectura AI
             </h2>
             <p className="text-xs sm:text-sm text-slate-500 mt-2 leading-relaxed">
               Setiap modul dibangun di atas metodologi pendidikan dan psikologi kognitif modern yang telah teruji efektivitasnya.
             </p>
           </div>
 
-          <div ref={featuresRef} className="grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-6">
+          {/* Features Grid: Fully Visible, Responsive & Clean */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-6">
             {features.map((feat) => {
               const Icon = feat.icon;
               return (
@@ -295,26 +319,44 @@ export default function LandingPage({ onEnterApp, onOpenFeature }: LandingPagePr
                     if (onOpenFeature) onOpenFeature(feat.id);
                     else onEnterApp();
                   }}
-                  className={`p-6 rounded-2xl border border-slate-200/80 bg-white hover:shadow-elevated ${feat.hoverBorder} transition-all duration-200 cursor-pointer group flex flex-col justify-between`}
+                  className={`p-5 sm:p-6 rounded-2xl border border-slate-200/90 bg-slate-50/50 hover:bg-white transition-all duration-200 cursor-pointer group flex flex-col justify-between ${feat.borderHover}`}
                 >
                   <div>
-                    <div className="flex items-center justify-between mb-4">
-                      <div className={`w-12 h-12 rounded-xl flex items-center justify-center border ${feat.accent}`}>
-                        <Icon className="w-6 h-6" />
+                    {/* Card Top */}
+                    <div className="flex items-center justify-between mb-3.5">
+                      <div className={`w-11 h-11 rounded-xl flex items-center justify-center border shadow-xs ${feat.iconBg}`}>
+                        <Icon className="w-5 h-5" />
                       </div>
-                      <span className="text-xs font-semibold text-slate-400 group-hover:text-brand-600 transition flex items-center gap-1">
+                      <span className="text-[11px] font-semibold text-slate-400 group-hover:text-chambray-600 transition flex items-center gap-1">
                         Coba Modul
                         <ChevronRight className="w-3.5 h-3.5 transform group-hover:translate-x-1 transition" />
                       </span>
                     </div>
 
-                    <h3 className="text-base font-bold text-slate-900 mb-1.5">{feat.title}</h3>
-                    <p className="text-xs sm:text-sm text-slate-500 leading-relaxed">{feat.desc}</p>
+                    {/* Badge & Title */}
+                    <div className="flex items-center gap-2 mb-1.5">
+                      <span className="text-[10px] font-bold px-2 py-0.5 rounded-md bg-white border border-slate-200 text-slate-600">
+                        {feat.badge}
+                      </span>
+                      <h3 className="text-sm sm:text-base font-bold text-slate-900 group-hover:text-chambray-700 transition">
+                        {feat.title}
+                      </h3>
+                    </div>
+
+                    {/* Description */}
+                    <p className="text-xs text-slate-600 leading-relaxed mt-1">
+                      {feat.desc}
+                    </p>
                   </div>
 
-                  <div className="mt-5 pt-3 border-t border-slate-100 flex items-center justify-between text-[11px]">
-                    <span className="text-slate-400">{feat.tag}</span>
-                    <span className="text-brand-600 font-medium">Buka di App →</span>
+                  {/* Card Bottom Tag */}
+                  <div className="mt-4 pt-3 border-t border-slate-200/70 flex items-center justify-between text-[11px]">
+                    <span className={`px-2 py-0.5 rounded font-medium ${feat.tagBg}`}>
+                      {feat.tag}
+                    </span>
+                    <span className="text-chambray-600 font-semibold group-hover:underline">
+                      Buka di Dashboard &rarr;
+                    </span>
                   </div>
                 </div>
               );
@@ -324,33 +366,53 @@ export default function LandingPage({ onEnterApp, onOpenFeature }: LandingPagePr
         </div>
       </section>
 
-      {/* ── How It Works ── */}
-      <section id="cara-kerja" className="py-16 sm:py-20 bg-white border-b border-slate-100">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      {/* ── How It Works Section ── */}
+      <section id="cara-kerja" className="py-14 sm:py-20 bg-slate-50/80 border-b border-slate-200/70">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
 
-          <div className="text-center max-w-xl mx-auto mb-12">
-            <span className="text-xs font-bold uppercase tracking-wider text-brand-600 bg-brand-50 px-3 py-1 rounded-full border border-brand-100">
+          {/* Section Header */}
+          <div className="text-center max-w-xl mx-auto mb-10 sm:mb-14">
+            <span className="text-[11px] font-bold uppercase tracking-wider text-bermuda-700 bg-bermuda-50 px-3 py-1 rounded-full border border-bermuda-200">
               Alur Penggunaan
             </span>
             <h2 className="text-2xl sm:text-3xl font-bold text-slate-900 tracking-tight mt-3">
               Cara Kerja Lectura AI
             </h2>
             <p className="text-xs sm:text-sm text-slate-500 mt-2">
-              Dari catatan mentah ke insight yang siap digunakan — hanya dalam 4 langkah.
+              Transformasi catatan rumit ke pemahaman siap ujian dalam 4 langkah terstruktur.
             </p>
           </div>
 
-          <div ref={howRef} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+          {/* Steps Grid: Fully Visible & Responsive */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
             {howItWorks.map((h) => {
               const Icon = h.icon;
               return (
-                <div key={h.step} className="relative p-5 rounded-2xl border border-slate-200/80 bg-slate-50/60 hover:bg-white hover:shadow-subtle transition-all">
-                  <span className="text-[11px] font-bold text-brand-400 font-mono tracking-widest">{h.step}</span>
-                  <div className="mt-3 w-10 h-10 rounded-xl bg-brand-600 text-white flex items-center justify-center shadow-brand">
-                    <Icon className="w-5 h-5" />
+                <div
+                  key={h.step}
+                  className="p-5 rounded-2xl bg-white border border-slate-200/80 shadow-subtle hover:border-chambray-300 hover:shadow-elevated transition-all flex flex-col justify-between"
+                >
+                  <div>
+                    <div className="flex items-center justify-between mb-3">
+                      <span className="text-xs font-mono font-bold text-chambray-400">
+                        LANGKAH {h.step}
+                      </span>
+                      <div className={`w-8 h-8 rounded-lg flex items-center justify-center shadow-xs ${h.color}`}>
+                        <Icon className="w-4 h-4" />
+                      </div>
+                    </div>
+
+                    <h4 className="text-xs sm:text-sm font-bold text-slate-900 mb-1">
+                      {h.title}
+                    </h4>
+                    <p className="text-[11px] text-slate-500 leading-relaxed">
+                      {h.desc}
+                    </p>
                   </div>
-                  <h4 className="mt-3 text-sm font-bold text-slate-900">{h.title}</h4>
-                  <p className="mt-1 text-[12px] text-slate-500 leading-relaxed">{h.desc}</p>
+
+                  <div className="mt-4 pt-2.5 border-t border-slate-100 flex items-center text-[10px] text-slate-400">
+                    <span>Instan &middot; Terstruktur</span>
+                  </div>
                 </div>
               );
             })}
@@ -359,75 +421,77 @@ export default function LandingPage({ onEnterApp, onOpenFeature }: LandingPagePr
         </div>
       </section>
 
-      {/* ── CTA Banner ── */}
-      <section className="py-14 bg-slate-50/60">
+      {/* ── Call to Action Banner ── */}
+      <section className="py-12 sm:py-16 bg-white">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div
-            ref={ctaBannerRef}
-            className="p-8 sm:p-12 rounded-3xl bg-gradient-to-br from-brand-900 via-brand-800 to-violet-900 text-white relative overflow-hidden shadow-xl flex flex-col md:flex-row items-center justify-between gap-6"
-          >
-            {/* Decorative glow */}
+          <div className="p-7 sm:p-10 rounded-3xl bg-gradient-to-br from-chambray-800 via-chambray-700 to-chambray-900 text-white relative overflow-hidden shadow-elevated flex flex-col md:flex-row items-center justify-between gap-6">
+            
+            {/* Subtle glow circle */}
             <div
               aria-hidden
-              className="pointer-events-none absolute -top-20 -right-20 w-80 h-80 rounded-full blur-3xl opacity-20"
-              style={{ background: '#a78bfa' }}
+              className="pointer-events-none absolute -top-16 -right-16 w-64 h-64 rounded-full blur-3xl opacity-20"
+              style={{ background: '#f0c74c' }}
             />
 
             <div className="relative z-10 max-w-xl text-center md:text-left space-y-2">
-              <span className="text-xs font-bold uppercase tracking-wider text-brand-300 bg-brand-950/50 px-3 py-1 rounded-full border border-brand-700/50 inline-block">
-                Siap Belajar Lebih Efisien?
+              <span className="text-[10px] font-bold uppercase tracking-wider text-ronchi-300 bg-chambray-950/60 px-3 py-1 rounded-full border border-chambray-600/50 inline-block">
+                Siap Belajar Efisien?
               </span>
-              <h2 className="text-2xl sm:text-3xl font-bold tracking-tight">
-                Mulai Gunakan Lectura AI Sekarang
+              <h2 className="text-xl sm:text-2xl lg:text-3xl font-bold tracking-tight">
+                Mulai Uji Coba Lectura AI Sekarang
               </h2>
-              <p className="text-xs sm:text-sm text-brand-200 leading-relaxed">
-                Akses instan ke dashboard interaktif. Dilengkapi contoh materi siap pakai untuk demonstrasi langsung tanpa perlu mendaftar.
+              <p className="text-xs sm:text-sm text-chambray-100 leading-relaxed">
+                Akses instan ke dashboard interaktif. Dilengkapi contoh materi kuliah siap pakai untuk demonstrasi langsung tanpa perlu login.
               </p>
             </div>
 
             <button
               onClick={onEnterApp}
-              className="relative z-10 inline-flex items-center gap-2 px-7 py-3.5 rounded-2xl bg-white hover:bg-brand-50 active:bg-slate-100 text-brand-900 font-bold text-sm shadow-lg transition shrink-0"
+              className="relative z-10 inline-flex items-center gap-2 px-6 py-3.5 rounded-xl bg-white hover:bg-slate-50 text-chambray-900 font-bold text-xs sm:text-sm shadow-md transition-all shrink-0 hover:scale-[1.02]"
             >
-              <Zap className="w-4 h-4 text-brand-600" />
-              <span>Buka Aplikasi</span>
-              <ArrowRight className="w-4 h-4 text-brand-600" />
+              <Zap className="w-4 h-4 text-zest-500" />
+              <span>Buka Dashboard Aplikasi</span>
+              <ArrowRight className="w-4 h-4 text-chambray-600" />
             </button>
+
           </div>
         </div>
       </section>
 
-      {/* ── Footer ── */}
-      <footer className="mt-auto border-t border-slate-200/80 bg-white/70 backdrop-blur-sm py-8 text-xs text-slate-500">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      {/* ── Minimalist Clean Footer ── */}
+      <footer className="mt-auto border-t border-slate-200/80 bg-white py-8 text-xs text-slate-500">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col md:flex-row items-center justify-between gap-4">
 
+            {/* Brand */}
             <div className="flex items-center gap-3">
-              <div className="w-8 h-8 rounded-xl bg-gradient-to-tr from-brand-700 via-brand-600 to-violet-500 flex items-center justify-center text-white shadow-sm shadow-brand-200">
+              <div className="w-7 h-7 rounded-lg bg-chambray-600 flex items-center justify-center text-white">
                 <BookOpen className="w-4 h-4" />
               </div>
-              <div>
-                <span className="font-bold text-slate-900 text-sm">
-                  Lectura<span className="text-brand-600 font-extrabold">AI</span>
-                </span>
-                <p className="text-[11px] text-slate-500">Asisten Akademik & Akselerator Pemahaman Mahasiswa</p>
-              </div>
+              <span className="font-bold text-slate-900 text-sm">
+                Lectura<span className="text-chambray-600 font-extrabold">AI</span>
+              </span>
+              <span className="text-[11px] text-slate-400">
+                Academic Copilot & Study Accelerator
+              </span>
             </div>
 
-            <div className="flex flex-wrap items-center justify-center gap-4 text-[11px]">
+            {/* Tech Specs */}
+            <div className="flex flex-wrap items-center justify-center gap-3 text-[11px]">
               <span className="flex items-center gap-1.5 text-slate-600">
                 <ShieldCheck className="w-3.5 h-3.5 text-emerald-600" />
-                Validasi Aman Zod & Sanitasi Input
+                Validasi Skema Zod
               </span>
               <span className="text-slate-300">•</span>
               <span className="flex items-center gap-1.5 text-slate-600">
-                <Sparkles className="w-3.5 h-3.5 text-brand-600" />
-                Google Gemini 3 Flash REST Engine
+                <Sparkles className="w-3.5 h-3.5 text-ronchi-500" />
+                Google Gemini Engine
               </span>
               <span className="text-slate-300">•</span>
-              <span className="text-slate-600">Next.js Full-Stack App Router</span>
+              <span className="text-slate-600">Next.js Full-Stack</span>
             </div>
 
+            {/* Copyright */}
             <div className="text-[11px] text-slate-400">
               © {new Date().getFullYear()} Lectura AI. Didesain untuk kesuksesan akademik.
             </div>

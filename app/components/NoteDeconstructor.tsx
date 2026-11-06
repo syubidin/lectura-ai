@@ -1,4 +1,4 @@
-﻿'use client';
+'use client';
 import React, { useState } from 'react';
 import { 
   BookOpen, 
@@ -10,7 +10,6 @@ import {
   Download, 
   Check, 
   FileText,
-  CornerDownLeft,
   RotateCcw
 } from 'lucide-react';
 import { NoteDeconstructionResult } from '@/lib/types';
@@ -129,16 +128,16 @@ Dihasilkan oleh Lectura AI (${modelUsed || 'Gemini AI'})`;
   };
 
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+    <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 sm:gap-6 items-start">
       
       {/* Left Input Form Panel */}
-      <div className="lg:col-span-5 bg-white rounded-2xl border border-slate-200/80 shadow-subtle p-5 sm:p-6 transition-all">
-        <div className="flex items-center justify-between pb-3 mb-4 border-b border-slate-100">
+      <div className="lg:col-span-5 bg-white rounded-2xl border border-slate-200/90 shadow-subtle p-4 sm:p-5 transition-all">
+        <div className="flex items-center justify-between pb-3 mb-3 border-b border-slate-100">
           <div className="flex items-center gap-2">
-            <span className="w-6 h-6 rounded-lg bg-brand-50 text-brand-600 flex items-center justify-center font-bold text-xs">
+            <span className="w-5 h-5 rounded-md bg-chambray-50 text-chambray-700 flex items-center justify-center font-bold text-[11px]">
               01
             </span>
-            <span className="font-semibold text-xs tracking-wide uppercase text-slate-700">
+            <span className="font-bold text-xs tracking-wide uppercase text-slate-700">
               Dekonstruksi Catatan
             </span>
           </div>
@@ -146,9 +145,9 @@ Dihasilkan oleh Lectura AI (${modelUsed || 'Gemini AI'})`;
             <button
               type="button"
               onClick={handleLoadSample}
-              className="text-xs text-brand-600 hover:text-brand-700 font-medium hover:underline flex items-center gap-1"
+              className="text-xs text-chambray-600 hover:text-chambray-700 font-semibold hover:underline flex items-center gap-1"
             >
-              <Sparkles className="w-3 h-3" />
+              <Sparkles className="w-3 h-3 text-ronchi-500" />
               Contoh Catatan
             </button>
             {(subject || content) && (
@@ -164,24 +163,24 @@ Dihasilkan oleh Lectura AI (${modelUsed || 'Gemini AI'})`;
           </div>
         </div>
 
-        <h2 className="text-xl font-bold text-slate-900 tracking-tight mb-1.5">
+        <h2 className="text-lg sm:text-xl font-bold text-slate-900 tracking-tight mb-1">
           Urai Materi Kuliah Rumit
         </h2>
-        <p className="text-xs text-slate-500 mb-5 leading-relaxed">
-          Tempelkan materi kuliah atau poin slide. AI akan memecahnya menjadi konsep kunci berbobot dan modul belajar 15-menit yang mudah dicerna otak.
+        <p className="text-xs text-slate-500 mb-4 leading-relaxed">
+          Tempelkan materi kuliah atau slide. AI akan memecahnya menjadi konsep kunci dan modul belajar 15-menit yang mudah dicerna otak.
         </p>
 
-        <form onSubmit={handleSubmit} className="space-y-4">
+        <form onSubmit={handleSubmit} className="space-y-3.5">
           <div>
-            <label className="block text-xs font-semibold text-slate-700 mb-1.5">
+            <label className="block text-xs font-semibold text-slate-700 mb-1">
               Mata Kuliah / Subjek
             </label>
             <input
               type="text"
               value={subject}
               onChange={(e) => setSubject(e.target.value)}
-              placeholder="Contoh: Pemrograman Web Lanjut / Kalkulus II"
-              className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-xs sm:text-sm text-slate-900 placeholder-slate-400 focus:bg-white focus:outline-none focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500 transition"
+              placeholder="Contoh: Pemrograman Web / Kalkulus"
+              className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs sm:text-sm text-slate-900 placeholder-slate-400 focus:bg-white focus:outline-none focus:ring-2 focus:ring-chambray-500/20 focus:border-chambray-500 transition"
               required
             />
             {/* Quick chips */}
@@ -200,7 +199,7 @@ Dihasilkan oleh Lectura AI (${modelUsed || 'Gemini AI'})`;
           </div>
 
           <div>
-            <div className="flex justify-between items-center mb-1.5">
+            <div className="flex justify-between items-center mb-1">
               <label className="block text-xs font-semibold text-slate-700">
                 Teks Catatan / Rangkuman Slide
               </label>
@@ -212,9 +211,9 @@ Dihasilkan oleh Lectura AI (${modelUsed || 'Gemini AI'})`;
               value={content}
               onChange={(e) => setContent(e.target.value)}
               onKeyDown={handleKeyDown}
-              rows={9}
-              placeholder="Tempelkan teks materi kuliah, rangkuman bab buku, atau slide presentasi di sini... (Ctrl+Enter untuk proses)"
-              className="w-full bg-slate-50 border border-slate-200 rounded-xl p-3 text-xs sm:text-sm text-slate-900 placeholder-slate-400 focus:bg-white focus:outline-none focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500 transition leading-relaxed resize-y"
+              rows={6}
+              placeholder="Tempelkan teks materi kuliah di sini... (Ctrl+Enter untuk proses)"
+              className="w-full bg-slate-50 border border-slate-200 rounded-xl p-3 text-xs sm:text-sm text-slate-900 placeholder-slate-400 focus:bg-white focus:outline-none focus:ring-2 focus:ring-chambray-500/20 focus:border-chambray-500 transition leading-relaxed resize-y sm:rows-7"
               required
             />
           </div>
@@ -229,18 +228,18 @@ Dihasilkan oleh Lectura AI (${modelUsed || 'Gemini AI'})`;
           <button
             type="submit"
             disabled={loading}
-            className="w-full bg-brand-600 hover:bg-brand-700 active:bg-brand-800 text-white font-semibold py-3 px-4 rounded-xl text-xs sm:text-sm shadow-sm shadow-brand-200 flex items-center justify-center gap-2 transition disabled:opacity-50"
+            className="w-full bg-chambray-600 hover:bg-chambray-700 active:bg-chambray-800 text-white font-semibold py-2.5 sm:py-3 px-4 rounded-xl text-xs sm:text-sm shadow-brand flex items-center justify-center gap-2 transition disabled:opacity-50"
           >
             {loading ? (
               <>
-                <Sparkles className="w-4 h-4 animate-spin" />
+                <Sparkles className="w-4 h-4 animate-spin text-ronchi-300" />
                 <span>Mendekonstruksi Materi...</span>
               </>
             ) : (
               <>
                 <BookOpen className="w-4 h-4" />
                 <span>Dekonstruksi Sekarang</span>
-                <span className="hidden sm:inline-flex items-center text-[10px] font-normal opacity-70 ml-1">
+                <span className="hidden sm:inline-flex items-center text-[10px] font-normal opacity-75 ml-1">
                   (Ctrl+Enter)
                 </span>
               </>
@@ -248,169 +247,149 @@ Dihasilkan oleh Lectura AI (${modelUsed || 'Gemini AI'})`;
           </button>
         </form>
 
-        <div className="mt-5 pt-3 border-t border-slate-100 flex items-center justify-between text-[11px] text-slate-400">
+        <div className="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-[10px] sm:text-[11px] text-slate-400">
           <span>Engine: Google Gemini AI</span>
-          <span>Bite-sized Cognitive Load</span>
+          <span>Chunking Theory</span>
         </div>
       </div>
 
       {/* Right Output Panel */}
-      <div className="lg:col-span-7 bg-white rounded-2xl border border-slate-200/80 shadow-subtle p-5 sm:p-6 min-h-[500px] flex flex-col justify-between transition-all">
+      <div className="lg:col-span-7 bg-white rounded-2xl border border-slate-200/90 shadow-subtle p-4 sm:p-5 min-h-[460px] flex flex-col justify-between transition-all">
         {loading ? (
           <div className="py-12 px-4 flex flex-col items-center justify-center text-center space-y-4">
-            <div className="w-12 h-12 rounded-2xl bg-brand-50 text-brand-600 flex items-center justify-center animate-pulse">
-              <Sparkles className="w-6 h-6 animate-spin text-brand-600" />
+            <div className="w-12 h-12 rounded-2xl bg-chambray-50 text-chambray-600 flex items-center justify-center animate-pulse">
+              <Sparkles className="w-6 h-6 animate-spin text-chambray-600" />
             </div>
             <div>
               <h3 className="text-base font-bold text-slate-900">
-                Menganalisis & Menyusun Modul...
+                Memecah Beban Kognitif Catatan...
               </h3>
               <p className="text-xs text-slate-500 max-w-sm mt-1">
-                Gemini AI sedang memilah konsep inti, merancang modul 15-menit, dan mengekstrak aturan kunci.
+                Gemini sedang memilah konsep esensial dan merancang modul belajar 15-menit.
               </p>
             </div>
-            {/* Shimmer skeleton */}
             <div className="w-full space-y-3 pt-6 max-w-lg">
-              <div className="h-4 bg-slate-100 rounded-full animate-pulse w-3/4 mx-auto"></div>
-              <div className="h-20 bg-slate-100 rounded-xl animate-pulse"></div>
-              <div className="h-20 bg-slate-100 rounded-xl animate-pulse"></div>
+              <div className="h-16 bg-slate-100 rounded-xl animate-pulse"></div>
+              <div className="h-24 bg-slate-100 rounded-xl animate-pulse"></div>
             </div>
           </div>
         ) : result ? (
-          <div>
-            {/* Result Header Bar */}
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 mb-5 border-b border-slate-100">
+          <div className="space-y-5">
+            {/* Header info */}
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-slate-100">
               <div>
-                <div className="flex items-center gap-2 mb-1">
-                  <span className={`text-[10px] font-semibold px-2 py-0.5 rounded-full ${
-                    mode === 'live_ai' 
-                      ? 'bg-emerald-50 text-emerald-700 border border-emerald-200' 
-                      : 'bg-amber-50 text-amber-700 border border-amber-200'
-                  }`}>
-                    {mode === 'live_ai' ? `Live AI (${modelUsed || 'Gemini 3 Flash'})` : 'Mode Demo Cerdas'}
-                  </span>
-                  <span className="text-xs text-slate-400">Hasil Analisis</span>
-                </div>
-                <h3 className="text-base sm:text-lg font-bold text-slate-900">
+                <span className="text-[10px] font-bold uppercase tracking-wider text-chambray-600 bg-chambray-50 px-2 py-0.5 rounded border border-chambray-200/60">
+                  Hasil Dekonstruksi
+                </span>
+                <h3 className="text-base sm:text-lg font-bold text-slate-900 mt-1">
                   {result.title}
                 </h3>
               </div>
-
-              <div className="flex items-center gap-2 self-start sm:self-center">
+              <div className="flex items-center gap-2">
                 <button
                   onClick={copyToClipboard}
-                  className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-slate-200 text-slate-600 hover:text-slate-900 hover:bg-slate-50 text-xs font-medium transition"
-                  title="Salin hasil sebagai Markdown"
+                  className="px-3 py-1.5 rounded-lg border border-slate-200 hover:bg-slate-50 text-slate-700 text-xs font-semibold flex items-center gap-1.5 transition shadow-xs"
+                  title="Salin hasil teks"
                 >
-                  {copied ? (
-                    <>
-                      <Check className="w-3.5 h-3.5 text-emerald-600" />
-                      <span className="text-emerald-600">Tersalin!</span>
-                    </>
-                  ) : (
-                    <>
-                      <Copy className="w-3.5 h-3.5 text-slate-400" />
-                      <span>Salin</span>
-                    </>
-                  )}
+                  {copied ? <Check className="w-3.5 h-3.5 text-emerald-600" /> : <Copy className="w-3.5 h-3.5 text-slate-500" />}
+                  <span>{copied ? 'Tersalin' : 'Salin'}</span>
                 </button>
                 <button
                   onClick={downloadMarkdown}
-                  className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-slate-200 text-slate-600 hover:text-slate-900 hover:bg-slate-50 text-xs font-medium transition"
-                  title="Unduh file .md"
+                  className="px-3 py-1.5 rounded-lg border border-slate-200 hover:bg-slate-50 text-slate-700 text-xs font-semibold flex items-center gap-1.5 transition shadow-xs"
+                  title="Download format Markdown"
                 >
-                  <Download className="w-3.5 h-3.5 text-slate-400" />
-                  <span>Unduh</span>
+                  <Download className="w-3.5 h-3.5 text-slate-500" />
+                  <span>.MD</span>
                 </button>
               </div>
             </div>
 
-            {/* Section 1: Core Concepts */}
-            <div className="mb-6">
-              <div className="flex items-center gap-2 mb-3">
-                <span className="text-xs font-bold uppercase tracking-wide text-slate-700">
-                  01. Konsep Inti Teridentifikasi
-                </span>
-                <span className="text-[10px] bg-slate-100 text-slate-600 px-1.5 py-0.2 rounded font-medium">
-                  {result.coreConcepts.length} Konsep
-                </span>
+            {/* Core Concepts */}
+            <div>
+              <div className="flex items-center gap-2 mb-2.5">
+                <span className="w-2 h-2 rounded-full bg-chambray-600"></span>
+                <h4 className="text-xs font-bold uppercase tracking-wider text-slate-800">
+                  Konsep Inti Teridentifikasi
+                </h4>
               </div>
-
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                {result.coreConcepts.map((concept, idx) => (
-                  <div 
-                    key={idx} 
-                    className="p-3.5 rounded-xl bg-slate-50/70 border border-slate-200/70 hover:border-slate-300 hover:bg-slate-50 transition"
-                  >
-                    <div className="flex items-start justify-between gap-2 mb-1.5">
-                      <span className="font-bold text-slate-900 text-xs sm:text-sm">
-                        {concept.term}
-                      </span>
-                      <span className={`text-[9px] font-semibold uppercase px-2 py-0.5 rounded-full shrink-0 ${
-                        concept.importance === 'high'
-                          ? 'bg-rose-100 text-rose-700 border border-rose-200/60'
-                          : concept.importance === 'medium'
-                          ? 'bg-amber-100 text-amber-700 border border-amber-200/60'
-                          : 'bg-slate-200 text-slate-700'
-                      }`}>
-                        {concept.importance === 'high' ? 'Krusial' : concept.importance === 'medium' ? 'Penting' : 'Dasar'}
-                      </span>
+              <div className="space-y-2">
+                {result.coreConcepts.map((concept, idx) => {
+                  const isCrucial = concept.importance?.toLowerCase().includes('krusial') || concept.importance?.toLowerCase().includes('high');
+                  return (
+                    <div
+                      key={idx}
+                      className="p-3 rounded-xl bg-slate-50/80 border border-slate-200/70 hover:border-slate-300 transition"
+                    >
+                      <div className="flex items-center justify-between gap-2 mb-1">
+                        <span className="font-bold text-xs text-slate-900">
+                          {concept.term}
+                        </span>
+                        <span className={`text-[10px] font-semibold px-2 py-0.5 rounded-full ${
+                          isCrucial
+                            ? 'bg-rose-50 text-rose-700 border border-rose-200'
+                            : 'bg-pigeon-50 text-chambray-800 border border-pigeon-200'
+                        }`}>
+                          {concept.importance}
+                        </span>
+                      </div>
+                      <p className="text-xs text-slate-600 leading-relaxed">
+                        {concept.definition}
+                      </p>
                     </div>
-                    <p className="text-xs text-slate-600 leading-relaxed">
-                      {concept.definition}
-                    </p>
-                  </div>
-                ))}
+                  );
+                })}
               </div>
             </div>
 
-            {/* Section 2: Bite-sized 15-min modules */}
-            <div className="mb-6">
-              <div className="flex items-center justify-between mb-3">
-                <span className="text-xs font-bold uppercase tracking-wide text-slate-700">
-                  02. Sesi Belajar Terfokus (15-Menit)
-                </span>
-                <span className="text-[11px] text-slate-400">
-                  Klik centang untuk menandai progres
+            {/* Bite-sized Modules */}
+            <div>
+              <div className="flex items-center justify-between mb-2.5">
+                <div className="flex items-center gap-2">
+                  <span className="w-2 h-2 rounded-full bg-emerald-600"></span>
+                  <h4 className="text-xs font-bold uppercase tracking-wider text-slate-800">
+                    Modul Belajar 15-Menit (Chunking)
+                  </h4>
+                </div>
+                <span className="text-[10px] text-slate-400 font-medium">
+                  {Object.values(checkedModules).filter(Boolean).length}/{result.biteSizedModules.length} Selesai
                 </span>
               </div>
-
-              <div className="space-y-2.5">
-                {result.biteSizedModules.map((mod, idx) => {
-                  const isDone = Boolean(checkedModules[idx]);
+              <div className="space-y-2">
+                {result.biteSizedModules.map((m, idx) => {
+                  const isDone = !!checkedModules[idx];
                   return (
                     <div
                       key={idx}
                       onClick={() => toggleModuleCheck(idx)}
-                      className={`p-3.5 rounded-xl border transition-all cursor-pointer flex items-start gap-3.5 ${
+                      className={`p-3 rounded-xl border transition cursor-pointer flex items-start gap-3 ${
                         isDone
-                          ? 'bg-emerald-50/40 border-emerald-200 text-slate-400 line-through opacity-80'
-                          : 'bg-white border-slate-200/80 hover:border-brand-300 hover:bg-brand-50/20 shadow-subtle'
+                          ? 'bg-emerald-50/50 border-emerald-200'
+                          : 'bg-white border-slate-200/80 hover:border-chambray-300 hover:bg-chambray-50/20 shadow-subtle'
                       }`}
                     >
                       <button
                         type="button"
-                        className={`w-5 h-5 rounded-md border flex items-center justify-center shrink-0 mt-0.5 transition ${
+                        className={`w-5 h-5 rounded-md flex items-center justify-center shrink-0 mt-0.5 border transition ${
                           isDone
-                            ? 'bg-emerald-600 border-emerald-600 text-white'
-                            : 'border-slate-300 bg-white hover:border-brand-500'
+                            ? 'border-emerald-600 bg-emerald-600 text-white'
+                            : 'border-slate-300 bg-white hover:border-chambray-500'
                         }`}
                       >
-                        {isDone && <Check className="w-3.5 h-3.5" />}
+                        {isDone && <Check className="w-3.5 h-3.5 stroke-[3]" />}
                       </button>
-
-                      <div className="flex-1">
-                        <div className="flex items-center gap-2 mb-1">
-                          <span className="text-xs font-bold text-slate-900">
-                            {mod.title}
+                      <div className="flex-1 min-w-0">
+                        <div className="flex items-center gap-2 mb-0.5">
+                          <span className={`text-xs font-bold ${isDone ? 'line-through text-slate-400' : 'text-slate-900'}`}>
+                            {m.title}
                           </span>
-                          <span className="inline-flex items-center gap-1 text-[10px] font-semibold px-2 py-0.5 rounded-full bg-slate-100 text-slate-600">
-                            <Clock className="w-2.5 h-2.5" />
-                            {mod.timeMinutes} Menit
+                          <span className="text-[10px] font-mono text-chambray-700 bg-chambray-50 px-1.5 py-0.2 rounded border border-chambray-200/60 shrink-0">
+                            <Clock className="w-2.5 h-2.5 inline mr-1 -mt-0.5" />
+                            {m.timeMinutes}m
                           </span>
                         </div>
-                        <p className="text-xs text-slate-600 leading-relaxed">
-                          {mod.action}
+                        <p className={`text-xs leading-relaxed ${isDone ? 'line-through text-slate-400' : 'text-slate-600'}`}>
+                          {m.action}
                         </p>
                       </div>
                     </div>
@@ -419,55 +398,57 @@ Dihasilkan oleh Lectura AI (${modelUsed || 'Gemini AI'})`;
               </div>
             </div>
 
-            {/* Section 3: Key Formulas / Rules */}
+            {/* Key Formulas / Rules */}
             {result.keyFormulaOrRules && result.keyFormulaOrRules.length > 0 && (
               <div>
-                <span className="text-xs font-bold uppercase tracking-wide text-slate-700 block mb-2.5">
-                  03. Kaidah & Rumus Kunci Ujian
-                </span>
-                <div className="space-y-2">
+                <div className="flex items-center gap-2 mb-2">
+                  <span className="w-2 h-2 rounded-full bg-ronchi-500"></span>
+                  <h4 className="text-xs font-bold uppercase tracking-wider text-slate-800">
+                    Kaidah & Rumus Ujian
+                  </h4>
+                </div>
+                <div className="p-3.5 rounded-xl bg-slate-50 border border-slate-200/70 space-y-1.5">
                   {result.keyFormulaOrRules.map((rule, idx) => (
-                    <div
-                      key={idx}
-                      className="p-3 rounded-xl bg-slate-900 text-slate-100 text-xs font-mono flex items-center justify-between gap-3 shadow-sm"
-                    >
-                      <div className="flex items-center gap-2">
-                        <span className="text-brand-400 font-bold">#</span>
-                        <span>{rule}</span>
-                      </div>
+                    <div key={idx} className="flex items-start gap-2 text-xs text-slate-700 font-mono">
+                      <span className="text-chambray-600 font-bold">#</span>
+                      <span className="leading-relaxed">{rule}</span>
                     </div>
                   ))}
                 </div>
               </div>
             )}
-
           </div>
         ) : (
-          /* Empty Ready State */
-          <div className="h-full py-16 px-4 flex flex-col items-center justify-center text-center">
-            <div className="w-14 h-14 rounded-2xl bg-brand-50 text-brand-600 flex items-center justify-center mb-4">
-              <FileText className="w-7 h-7" />
+          /* Empty placeholder */
+          <div className="py-14 px-4 flex flex-col items-center justify-center text-center my-auto">
+            <div className="w-12 h-12 rounded-2xl bg-chambray-50 text-chambray-600 flex items-center justify-center mb-3">
+              <FileText className="w-6 h-6" />
             </div>
-            <h3 className="text-base font-bold text-slate-900 mb-1.5">
-              Siap Menganalisis Catatan Anda
+            <h3 className="text-sm sm:text-base font-bold text-slate-800 mb-1">
+              Belum Ada Catatan yang Didekonstruksi
             </h3>
-            <p className="text-xs text-slate-500 max-w-sm leading-relaxed mb-6">
-              Ketikkan atau tempel materi catatan di panel sebelah kiri, atau gunakan tombol di bawah untuk melihat contoh nyata seketika.
+            <p className="text-xs text-slate-500 max-w-sm mb-4 leading-relaxed">
+              Masukkan catatan kuliah Anda di formulir sebelah kiri atau klik tombol &quot;Contoh Catatan&quot; untuk langsung menguji sistem.
             </p>
             <button
               onClick={handleLoadSample}
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-slate-100 hover:bg-slate-200/80 text-slate-700 text-xs font-semibold transition"
+              className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-semibold transition"
             >
-              <Sparkles className="w-3.5 h-3.5 text-brand-600" />
-              <span>Gunakan Contoh Catatan Siap Pakai</span>
+              <Sparkles className="w-3.5 h-3.5 text-ronchi-500" />
+              <span>Coba dengan Contoh Materi Web Dev</span>
             </button>
           </div>
         )}
 
-        <div className="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between text-[11px] text-slate-400">
-          <span>Active Learning Framework</span>
-          <span>Diverifikasi Keamanan Zod</span>
-        </div>
+        {/* Footer info badge */}
+        {result && (
+          <div className="mt-5 pt-3 border-t border-slate-100 flex items-center justify-between text-[11px] text-slate-400">
+            <span>Model: {modelUsed}</span>
+            <span className={mode === 'fallback' ? 'text-amber-600 font-medium' : 'text-emerald-600 font-medium'}>
+              {mode === 'fallback' ? '⚡ Mode Demo Cerdas' : '🟢 Live Gemini AI'}
+            </span>
+          </div>
+        )}
       </div>
 
     </div>
