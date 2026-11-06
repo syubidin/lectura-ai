@@ -6,9 +6,11 @@ export const metadata: Metadata = {
   description: 'Platform AI copilot akademik modern: dekonstruksi catatan kuliah jadi modul 15-menit, prediksi soal jebakan dosen, dan rencana belajar kilat bertenaga Google Gemini AI.',
   icons: {
     icon: [
-      { url: '/favicon.svg', type: 'image/svg+xml' },
+      { url: '/favicon.svg?v=2', type: 'image/svg+xml' },
+      { url: '/favicon.ico?v=2', sizes: 'any' },
     ],
-    apple: '/favicon.svg',
+    shortcut: '/favicon.svg?v=2',
+    apple: '/favicon.svg?v=2',
   },
   keywords: ['AI akademik', 'belajar mahasiswa', 'Gemini AI', 'catatan kuliah', 'prediksi soal ujian', 'feynman', 'cram plan'],
   authors: [{ name: 'syubidin', url: 'https://github.com/syubidin' }],
@@ -23,6 +25,8 @@ export default function RootLayout({
   return (
     <html lang="id" className="scroll-smooth">
       <head>
+        <link rel="icon" href="/favicon.svg?v=2" type="image/svg+xml" />
+        <link rel="alternate icon" href="/favicon.ico?v=2" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link

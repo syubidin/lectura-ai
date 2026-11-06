@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <defs>
+    <!-- Background Gradient: Chambray #38598a to Deep Chambray #26364f -->
+    <linearGradient id="bgGrad" x1="0" y1="0" x2="64" y2="64" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#4C78A8"/>
+      <stop offset="50%" stop-color="#38598A"/>
+      <stop offset="100%" stop-color="#26364F"/>
+    </linearGradient>
+
+    <!-- Right Page Gradient: Bermuda Gray #718da2 to Pigeon Post #a7c4d7 -->
+    <linearGradient id="rightPageGrad" x1="34" y1="18" x2="52" y2="48" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="100%" stop-color="#A7C4D7"/>
+    </linearGradient>
+
+    <!-- Star Glow Gradient: Ronchi #f0c74c to Zest #e57e24 -->
+    <linearGradient id="sparkGrad" x1="44" y1="8" x2="56" y2="20" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#F0C74C"/>
+      <stop offset="100%" stop-color="#E57E24"/>
+    </linearGradient>
+
+    <!-- Subtle drop shadow for book pages -->
+    <filter id="bookShadow" x="8" y="14" width="48" height="40" filterUnits="userSpaceOnUse">
+      <feDropShadow dx="0" dy="2" stdDeviation="2" flood-color="#182233" flood-opacity="0.35"/>
+    </filter>
+  </defs>
+
+  <!-- Base Rounded Container (Chambray) -->
+  <rect width="64" height="64" rx="16" fill="url(#bgGrad)"/>
+  
+  <!-- Subtle Inner Border -->
+  <rect x="1" y="1" width="62" height="62" rx="15" stroke="#A7C4D7" stroke-width="1.5" stroke-opacity="0.25"/>
+
+  <!-- Book Graphic Group with Shadow -->
+  <g filter="url(#bookShadow)">
+    <!-- Left Page (Crisp White / Academic Clarity) -->
+    <path d="M13 21C13 19.3431 14.3431 18 16 18H31V48H16C14.3431 48 13 46.6569 13 45V21Z" fill="#FFFFFF"/>
+    
+    <!-- Left Page Lines (Chambray #38598a) -->
+    <rect x="17" y="25" width="10" height="2.5" rx="1.25" fill="#38598A" fill-opacity="0.75"/>
+    <rect x="17" y="31" width="10" height="2.5" rx="1.25" fill="#38598A" fill-opacity="0.75"/>
+    <rect x="17" y="37" width="7" height="2.5" rx="1.25" fill="#38598A" fill-opacity="0.75"/>
+
+    <!-- Right Page (Pigeon Post / Bermuda Gradient) -->
+    <path d="M33 18H48C49.6569 18 51 19.3431 51 21V45C51 46.6569 49.6569 48 48 48H33V18Z" fill="url(#rightPageGrad)"/>
+    
+    <!-- Right Page Lines (Bermuda Gray #718da2) -->
+    <rect x="37" y="25" width="10" height="2.5" rx="1.25" fill="#718DA2" fill-opacity="0.85"/>
+    <rect x="37" y="31" width="10" height="2.5" rx="1.25" fill="#718DA2" fill-opacity="0.85"/>
+    <rect x="37" y="37" width="7" height="2.5" rx="1.25" fill="#718DA2" fill-opacity="0.85"/>
+
+    <!-- Spine Divider (Bermuda Gray Tint) -->
+    <rect x="31" y="18" width="2" height="30" fill="#293E5E" fill-opacity="0.3"/>
+  </g>
+
+  <!-- Academic AI Spark (Ronchi #f0c74c & Zest #e57e24) -->
+  <g>
+    <!-- Outer Glow -->
+    <circle cx="50" cy="14" r="7" fill="#F0C74C" fill-opacity="0.25"/>
+    
+    <!-- 4-point Diamond Star -->
+    <path d="M50 7L51.8 12.2L57 14L51.8 15.8L50 21L48.2 15.8L43 14L48.2 12.2L50 7Z" fill="url(#sparkGrad)"/>
+    
+    <!-- Mini accent spark in Zest -->
+    <circle cx="41" cy="9" r="1.5" fill="#E57E24"/>
+  </g>
+</svg>
